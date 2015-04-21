@@ -7,7 +7,7 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 	{ "keys": ["super+shift+w"], "command": "close_window" },
 	{ "keys": ["super+o"], "command": "prompt_open" },
 	{ "keys": ["super+shift+t"], "command": "reopen_last_file" },
-	{ "keys": ["super+alt+up"], "command": "switch_file", "args": {"extensions": ["cpp", "cxx", "cc", "c", "hpp", "hxx", "h", "ipp", "inl", "m", "mm"]} },
+	{ "keys": ["super+alt+up"], "command": "switch_file", "args": {"extensions": ["cpp", "cxx", "cc", "c", "hpp", "hxx", "hh", "h", "ipp", "inl", "m", "mm"]} },
 	{ "keys": ["super+n"], "command": "new_file" },
 	{ "keys": ["super+s"], "command": "save" },
 	{ "keys": ["super+shift+s"], "command": "prompt_save_as" },
@@ -101,7 +101,8 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 	{ "keys": ["tab"], "command": "insert_best_completion", "args": {"default": "\t", "exact": false},
 		"context":
 		[
-			{ "key": "setting.tab_completion", "operator": "equal", "operand": true }
+			{ "key": "setting.tab_completion", "operator": "equal", "operand": true },
+			{ "key": "preceding_text", "operator": "regex_match", "operand": ".*[^0-9]$", "match_all": true },
 		]
 	},
 	{ "keys": ["tab"], "command": "replace_completion_with_next_completion", "context":

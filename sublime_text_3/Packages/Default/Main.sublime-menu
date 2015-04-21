@@ -642,7 +642,7 @@
                     { "command": "next_view_in_stack", "caption": "Next File in Stack" },
                     { "command": "prev_view_in_stack", "caption": "Previous File in Stack" },
                     { "caption": "-" },
-                    { "command": "switch_file", "args": {"extensions": ["cpp", "cxx", "cc", "c", "hpp", "hxx", "h", "ipp", "inl", "m", "mm"]}, "caption": "Switch Header/Implementation", "mnemonic": "H" },
+                    { "command": "switch_file", "args": {"extensions": ["cpp", "cxx", "cc", "c", "hpp", "hxx", "hh", "h", "ipp", "inl", "m", "mm"]}, "caption": "Switch Header/Implementation", "mnemonic": "H" },
                     { "caption": "-" },
                     { "command": "select_by_index", "args": { "index": 0 } },
                     { "command": "select_by_index", "args": { "index": 1 } },

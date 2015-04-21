@@ -5,7 +5,7 @@
 	{ "keys": ["ctrl+shift+w"], "command": "close_window" },
 	{ "keys": ["ctrl+o"], "command": "prompt_open_file" },
 	{ "keys": ["ctrl+shift+t"], "command": "reopen_last_file" },
-	{ "keys": ["alt+o"], "command": "switch_file", "args": {"extensions": ["cpp", "cxx", "cc", "c", "hpp", "hxx", "h", "ipp", "inl", "m", "mm"]} },
+	{ "keys": ["alt+o"], "command": "switch_file", "args": {"extensions": ["cpp", "cxx", "cc", "c", "hpp", "hxx", "hh", "h", "ipp", "inl", "m", "mm"]} },
 	{ "keys": ["ctrl+n"], "command": "new_file" },
 	{ "keys": ["ctrl+s"], "command": "save" },
 	{ "keys": ["ctrl+shift+s"], "command": "prompt_save_as" },
@@ -136,7 +136,8 @@
 	{ "keys": ["tab"], "command": "insert_best_completion", "args": {"default": "\t", "exact": false},
 		"context":
 		[
-			{ "key": "setting.tab_completion", "operator": "equal", "operand": true }
+			{ "key": "setting.tab_completion", "operator": "equal", "operand": true },
+			{ "key": "preceding_text", "operator": "regex_match", "operand": ".*[^0-9]$", "match_all": true },
 		]
 	},
 	{ "keys": ["tab"], "command": "replace_completion_with_next_completion", "context":

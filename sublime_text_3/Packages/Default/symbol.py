@@ -87,10 +87,11 @@ def navigate_to_symbol(view, symbol, locations):
     elif len(locations) == 1:
         open_location(view.window(), locations[0])
     else:
-        view.window().show_quick_panel(
+        window = view.window()
+        window.show_quick_panel(
             items = [format_location(l) for l in locations],
-            on_select = lambda x: select_entry(view.window(), locations, x, view, orig_sel),
-            on_highlight = lambda x: highlight_entry(view.window(), locations, x),
+            on_select = lambda x: select_entry(window, locations, x, view, orig_sel),
+            on_highlight = lambda x: highlight_entry(window, locations, x),
             flags = sublime.KEEP_OPEN_ON_FOCUS_LOST)
 
 class GotoDefinition(sublime_plugin.WindowCommand):

@@ -383,6 +383,11 @@
     // their symbols. This is required for Goto Definition to work.
     "index_files": true,
 
+    // Set the number threads to use for indexing. A value of 0 will make
+    // Sublime Text guess based on the number of cores. Use the index_files
+    // setting to disable all workers.
+    "index_workers": 0,
+
     // index_exclude_patterns indicate which files won't be indexed.
     "index_exclude_patterns": ["*.log"],
 

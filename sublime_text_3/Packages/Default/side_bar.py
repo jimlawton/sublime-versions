@@ -38,7 +38,13 @@ class NewFolderCommand(sublime_plugin.WindowCommand):
 
 class DeleteFolderCommand(sublime_plugin.WindowCommand):
     def run(self, dirs):
-        if sublime.ok_cancel_dialog("Delete Folder?", "Delete"):
+
+        if len(dirs) == 1:
+            message = "Delete Folder %s?" % dirs[0]
+        else:
+            message = "Delete %d Folders?" % len(dirs)
+
+        if sublime.ok_cancel_dialog(message, "Delete"):
             import Default.send2trash as send2trash
             try:
                 for d in dirs:
