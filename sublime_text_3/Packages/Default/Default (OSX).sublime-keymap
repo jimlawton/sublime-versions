@@ -83,14 +83,14 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 			{ "key": "overlay_visible", "operator": "equal", "operand": true }
 		]
 	},
-	{ "keys": ["escape"], "command": "hide_auto_complete", "context":
-		[
-			{ "key": "auto_complete_visible", "operator": "equal", "operand": true }
-		]
-	},
 	{ "keys": ["escape"], "command": "hide_popup", "context":
 		[
 			{ "key": "popup_visible", "operator": "equal", "operand": true }
+		]
+	},
+	{ "keys": ["escape"], "command": "hide_auto_complete", "context":
+		[
+			{ "key": "auto_complete_visible", "operator": "equal", "operand": true }
 		]
 	},
 

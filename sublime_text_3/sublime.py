@@ -19,6 +19,7 @@ LITERAL = 1
 MONOSPACE_FONT = 1
 KEEP_OPEN_ON_FOCUS_LOST = 2
 HTML = 1
+COOPERATE_WITH_AUTO_COMPLETE = 2
 
 DRAW_EMPTY = 1
 HIDE_ON_MINIMAP = 2
@@ -365,7 +366,7 @@ class Window(object):
                     for j in range(items_per_row):
                         flat_items.append(items[i][j])
 
-        return sublime_api.window_show_quick_panel(self.window_id, flat_items,
+        sublime_api.window_show_quick_panel(self.window_id, flat_items,
             items_per_row, on_select, on_highlight, flags, selected_index)
 
     def folders(self):
@@ -945,7 +946,7 @@ class View(object):
         return sublime_api.view_show_popup_table(self.view_id, items,
             on_select, flags, -1)
 
-    def show_popup(self, content, flags = HTML, location = -1,
+    def show_popup(self, content, flags = 0, location = -1,
         max_width = 320, max_height = 240,
         on_navigate = None, on_hide = None):
         sublime_api.view_show_popup(self.view_id, location, content,

@@ -1,3 +1,16 @@
+Build 3071
+----------
+Release Date: 20 Feb 2015
+
+    * API: Added COOPERATE_WITH_AUTO_COMPLETE flag for View.show_popup()
+    * Properly improved behavior of Goto Definition when using multiple panes
+    * Fixed a bug with scrolling tabs, where a 1 pixel line would occasionally appear underneath them
+    * minihtml: Added support for trivial tags small, code, em, var, and strong
+    * minihtml: Fixed units not being assigned correctly when using shorthand notation
+    * Windows: Popup windows are now able to receive scroll wheel input
+    * API: Fixed a regression 3070 where Window.show_quick_panel() incorrectly reported the highlighted item
+    * API: Fixed a crash caused by passing an empty string into View.show_popup()
+
 Build 3070
 ----------
 Release Date: 17 Feb 2015

@@ -68,8 +68,7 @@ def navigate_to_symbol(view, symbol, locations):
 
         window.open_file(fname + ":" + str(row) + ":" + str(col),
             group = window.active_group(),
-            # flags = sublime.TRANSIENT | sublime.ENCODED_POSITION | sublime.FORCE_GROUP)
-            flags = sublime.TRANSIENT | sublime.ENCODED_POSITION)
+            flags = sublime.TRANSIENT | sublime.ENCODED_POSITION | sublime.FORCE_GROUP)
 
     def format_location(l):
         fname, display_fname, rowcol = l
@@ -89,7 +88,8 @@ def navigate_to_symbol(view, symbol, locations):
         view.window().show_quick_panel(
             items = [format_location(l) for l in locations],
             on_select = lambda x: select_entry(view.window(), locations, x, view, orig_sel),
-            on_highlight = lambda x: highlight_entry(view.window(), locations, x))
+            on_highlight = lambda x: highlight_entry(view.window(), locations, x),
+            flags = sublime.KEEP_OPEN_ON_FOCUS_LOST)
 
 class GotoDefinition(sublime_plugin.WindowCommand):
     def run(self, symbol = None):
