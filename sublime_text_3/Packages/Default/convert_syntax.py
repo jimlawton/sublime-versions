@@ -1,0 +1,488 @@
+import plistlib
+import os
+import sys
+
+try:
+    import yaml
+except ImportError:
+    pass
+
+def needs_yaml_quoting(s):
+    return (s == "" or s[0] in "\"'%-:?@`&*!,#|>0123456789"
+        or s in ["true", "false", "null"]
+        or "# " in s or ": " in s
+        or "[" in s or "]" in s or "{" in s or "}" in s
+        or "\n" in s or s[-1] in ":#" or s.strip() != s)
+
+def quote(s):
+    if "\\" in s or '"' in s:
+        return "'" + s.replace("'", "''") + "'"
+    else:
+        return '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+def order_keys(l):
+    key_order = reversed(["name", "main", "match", "comment", "file_extensions", "first_line_match",
+        "hidden", "match", "scope", "main"])
+    l = sorted(l)
+    for key in key_order:
+        if key in l:
+            del l[l.index(key)]
+            l.insert(0, key)
+    return l
+
+def to_yaml(val, start_block_on_newline = False, indent = 0):
+    tab_size = 2
+    out = ""
+
+    if indent == 0:
+        out += "%YAML 1.2\n---\n"
+        out += "# http://www.sublimetext.com/docs/3/syntax.html\n"
+
+    if isinstance(val, list):
+        if len(val) == 0:
+            out += "[]\n"
+        else:
+            if start_block_on_newline:
+                out += '\n'
+
+            for x in val:
+                out += " " * indent
+                out += "- "
+                out += to_yaml(x, False, indent + 2)
+    elif isinstance(val, dict):
+        if start_block_on_newline:
+            out += '\n'
+
+        first = True
+        for k in order_keys(val.keys()):
+            v = val[k]
+
+            if not first or start_block_on_newline:
+                out += " " * indent
+            else:
+                first = False
+
+            if isinstance(k, int):
+                out += str(k)
+            elif needs_yaml_quoting(k):
+                out += quote(k)
+            else:
+                out += k
+
+            out += ": "
+            out += to_yaml(v, True, indent + tab_size)
+    elif isinstance(val, str):
+        if needs_yaml_quoting(val):
+            if "\n" in val:
+                assert(start_block_on_newline)
+                if start_block_on_newline:
+                    out += '|\n'
+                for l in val.splitlines():
+                    out += " " * indent
+                    out += l
+                    out += "\n"
+            else:
+                out += quote(val)
+                out += "\n"
+        else:
+            out += val
+            out += "\n"
+    elif isinstance(val, bool):
+        if val:
+            out += "true\n"
+        else:
+            out += "false\n"
+    else:
+        out += str(val) + "\n"
+    return out
+
+def build_scope_map():
+    syntax_by_scope = {}
+    for f in sublime.find_resources("*.tmLanguage"):
+        s = sublime.load_resource(f)
+        l = plistlib.readPlistFromBytes(s.encode("utf-8"))
+        if "scopeName" in l:
+            fname = os.path.splitext(f)[0] + ".sublime-syntax"
+            syntax_by_scope[l["scopeName"]] = fname
+    return syntax_by_scope
+
+scope_map = {}
+def syntax_for_scope(key):
+    global scope_map
+    if len(scope_map) == 0:
+        scope_map = build_scope_map()
+
+    return scope_map[key]
+
+def is_external_syntax(key):
+    return key[0] not in "#$"
+
+def format_external_syntax(key):
+    assert(is_external_syntax(key))
+
+    if '#' in key:
+        syntax, rule = key.split('#')
+        return syntax_for_scope(syntax) + '#' + rule
+    else:
+        return syntax_for_scope(key)
+
+def format_regex(s):
+    if "\n" in s:
+        # trim the leading tabs off of each line
+        s = "\n".join([l.lstrip() for l in s.splitlines()]).rstrip("\n") + "\n"
+    return s
+
+def format_comment(s):
+    s = s.strip().replace("\t", "    ")
+
+    if "\n" in s:
+        s = s.rstrip("\n") + "\n"
+
+    return s
+
+def format_captures(c):
+    ret = {}
+    for k, v in c.items():
+        if "name" not in v:
+            warn("patterns and includes are not supported within captures")
+            continue
+
+        try:
+            ret[int(k)] = v["name"]
+        except ValueError:
+            warn("named capture used, this is unsupported")
+            ret[k] = v["name"]
+    return ret
+
+def warn(msg):
+    print(msg, file=sys.stderr)
+
+def make_context(patterns, repository, rewrite_map):
+    ctx = []
+    for p in patterns:
+        if "begin" in p:
+            entry = {}
+            entry["match"] = format_regex(p["begin"])
+            if "beginCaptures" in p or "captures" in p:
+                if "beginCaptures" in p:
+                    captures = format_captures(p["beginCaptures"])
+                else:
+                    captures = format_captures(p["captures"])
+
+                if "0" in captures:
+                    entry["scope"] = captures["0"]
+                    del captures["0"]
+
+                if len(captures) > 0:
+                    entry["captures"] = captures
+
+            end_entry = {}
+            end_entry["match"] = format_regex(p["end"])
+            end_entry["pop"] = True
+            if "endCaptures" in p:
+                captures = format_captures(p["endCaptures"])
+                if "0" in captures:
+                    end_entry["scope"] = captures["0"]
+                    del captures["0"]
+
+                if len(captures) > 0:
+                    end_entry["captures"] = captures
+
+            if "\\G" in end_entry["match"]:
+                warn("pop pattern contains \\G, this will not work as expected"
+                    " if it's intended to refer to the begin regex: "
+                    + end_entry["match"] )
+
+            apply_last = False
+            if "applyEndPatternLast" in p and p["applyEndPatternLast"] == 1:
+                apply_last = True
+
+            if "patterns" in p:
+                child_patterns = p["patterns"]
+            else:
+                child_patterns = []
+
+            child = make_context(child_patterns, repository, rewrite_map)
+            if apply_last:
+                child.append(end_entry)
+            else:
+                child.insert(0, end_entry)
+
+            if "contentName" in p:
+                child.insert(0, {"meta_content_scope": p["contentName"]})
+            if "name" in p:
+                child.insert(0, {"meta_scope": p["name"]})
+
+            if "comment" in p:
+                comment = format_comment(p["comment"])
+                if len(comment) > 0:
+                    entry["comment"] = comment
+
+            entry["push"] = child
+
+            ctx.append(entry)
+
+        elif "match" in p:
+            entry = {}
+            entry["match"] = format_regex(p["match"])
+
+            if "name" in p:
+                entry["scope"] = p["name"]
+
+            if "captures" in p:
+                entry["captures"] = format_captures(p["captures"])
+
+            if "comment" in p:
+                comment = format_comment(p["comment"])
+                if len(comment) > 0:
+                    entry["comment"] = comment
+
+            ctx.append(entry)
+
+        elif "include" in p:
+            key = p["include"]
+
+            if key in rewrite_map:
+                key = rewrite_map[key]
+
+            if key[0] == '#':
+                key = key[1:]
+                if key not in repository:
+                    raise Exception("no entry in repository for " + key)
+
+                ctx.append({"include": key})
+            elif key == "$self":
+                ctx.append({"include": "main"})
+            elif key == "$base":
+                ctx.append({"include": "$top_level_main"})
+            elif key[0] == '$':
+                raise Exception("unknown include: " + key)
+            else:
+                # looks like an external include
+                # assert(is_external_syntax(key))
+                # ctx.append({"include-syntax": key})
+                ctx.append({"include": format_external_syntax(key)})
+
+        else:
+            raise Exception("unknown pattern type: ")
+
+    # Rewrite all the include-syntax patterns to the format expected by
+    # sublime-syntax files
+    # for j in range(len(ctx)):
+    #     p = ctx[j]
+    #     if "push" in p:
+    #         target_ctx = p["push"]
+    #         assert(isinstance(target_ctx, list))
+
+    #         for i in range(len(target_ctx)):
+    #             target_pattern = target_ctx[i]
+
+    #             if "include-syntax" in target_pattern:
+    #                 new_pattern = p.copy()
+
+    #                 ref = target_pattern["include-syntax"]
+    #                 if '#' in ref:
+    #                     syntax, rule = ref.split('#')
+
+    #                     new_pattern["push"] = syntax_for_scope(syntax) \
+    #                          + '#' + rule
+    #                 else:
+    #                     new_pattern["push"] = syntax_for_scope(ref)
+
+    #                 new_pattern["with_prototype"] = p["push"]
+    #                 del new_pattern["with_prototype"][i]
+
+    #                 for pat in new_pattern["with_prototype"]:
+    #                     if "pop" in pat and "(?=" not in pat["match"]:
+    #                         warn("syntax included, but the pop pattern doesn't"
+    #                             " contain a lookahead, so it may not pop"
+    #                             " off all contexts of the included syntax."
+    #                             " Check this will work as expected: "
+    #                             + pat["match"])
+
+    #                 ctx[j] = new_pattern
+    #                 break
+    return ctx
+
+def convert(fname):
+    s = sublime.load_resource(fname)
+    l = plistlib.readPlistFromBytes(s.encode("utf-8"))
+
+    if "repository" in l:
+        repository = l["repository"]
+    else:
+        repository = {}
+
+    # normalize the repository values into being a list of patterns
+    for key, value in repository.items():
+        if "begin" in value or "match" in value:
+            repository[key] = [value]
+        else:
+            repository[key] = value["patterns"]
+
+    # Build the rewrite map. This is used to inline items that include an
+    # external syntax
+    rewrite_map = {}
+    # for key, patterns in repository.items():
+    #     for pattern in patterns:
+    #         if "include" in pattern:
+    #             if is_external_syntax(pattern["include"]):
+    #                 # can't currently handle anything other than simple
+    #                 # external includes
+    #                 assert(len(pattern) == 1)
+    #                 rewrite_map['#' + key] = pattern["include"]
+
+    # remove items in the rewrite map from the repo
+    # for k, v in rewrite_map.items():
+    #     del repository[k[1:]]
+
+    contexts = {"main": make_context(l["patterns"], repository, rewrite_map)}
+
+    for key, value in repository.items():
+        assert(key != "main")
+
+        contexts[key] = make_context(value, repository, rewrite_map)
+
+    syn = {}
+
+    if "comment" in l:
+        comment = format_comment(l["comment"])
+        if len(comment) > 0:
+            syn["comment"] = comment
+
+    if "name" in l:
+        syn["name"] = l["name"]
+
+    if "scopeName" in l:
+        syn["scope"] = l["scopeName"]
+
+    if "fileTypes" in l:
+        syn["file_extensions"] = l["fileTypes"]
+
+    if "firstLineMatch" in l:
+        syn["first_line_match"] = l["firstLineMatch"]
+
+    if "hideFromUser" in l:
+        syn["hidden"] = l["hideFromUser"]
+
+    if "hidden" in l:
+        syn["hidden"] = l["hidden"]
+
+    syn["contexts"] = contexts
+
+    return syn
+
+
+def extract_by_key(key, v):
+    if isinstance(v, list):
+        ret = []
+        for x in v:
+            ret.extend(extract_by_key(key, x))
+        return ret
+    elif isinstance(v, dict):
+        ret = []
+        for k,x in v.items():
+            if k == key:
+                ret.append(x)
+            else:
+                ret.extend(extract_by_key(key, x))
+        return ret
+    else:
+        return []
+
+def find_external_refs():
+    refmap = {}
+    for f in sublime.find_resources("*.tmLanguage"):
+        l = convert(f)
+        refmap[f] = extract_by_key("syntax", l)
+    print(to_yaml(refmap, False, 0))
+
+
+try:
+    import sublime
+    import sublime_plugin
+
+    class ConvertSyntaxCommand(sublime_plugin.WindowCommand):
+        def run(self):
+            if not self.window.active_view():
+                return
+
+            syn = self.window.active_view().settings().get('syntax')
+            base, ext = os.path.splitext(syn)
+            if not ext == ".tmLanguage":
+                return
+
+            data = to_yaml(convert(syn))
+
+            # to_yaml will leave some trailing whitespace, remote it
+            data = "\n".join([l.rstrip() for l in data.splitlines()]) + "\n"
+
+            v = self.window.new_file()
+            v.set_name(os.path.basename(base) + ".sublime-syntax")
+            v.assign_syntax("Packages/YAML/YAML.sublime-syntax")
+            v.settings().set("default_dir",
+                os.path.join(sublime.packages_path(), "User"))
+            v.run_command('append', {'characters': data})
+
+        def is_visible(self):
+            view = self.window.active_view()
+            if not view:
+                return False
+
+            syn = view.settings().get('syntax')
+            base, ext = os.path.splitext(syn)
+            if not ext == ".tmLanguage":
+                return False
+
+            return True
+
+        def description(self):
+            view = self.window.active_view()
+            if not view:
+                return super().description()
+
+            syn = view.settings().get('syntax')
+            base, ext = os.path.splitext(syn)
+            if not ext == ".tmLanguage":
+                return super().description()
+
+            return "New Syntax from " + os.path.basename(syn) + "…"
+
+
+except ImportError:
+    import fnmatch
+
+    class sublime:
+        def find_resources(pattern):
+            paths = []
+            for root, dirs, files in os.walk('.'):
+                for fname in files:
+                    if fnmatch.fnmatch(fname, pattern):
+                        path = os.path.join(root, fname)
+
+                        if path[0:2] == "./" or path[0:2] == ".\\":
+                            path = path[2:]
+
+                        paths.append(path)
+            return paths
+
+        def load_resource(fname):
+            with open(fname, "r", encoding="utf-8") as f:
+                return f.read()
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("usage: convert_syntax.py files")
+    else:
+        for fname in sys.argv[1:]:
+            o = convert(fname)
+
+            # verify that to_yaml produces valid yaml for this object
+            if yaml:
+                assert(o == yaml.load(to_yaml(o)))
+
+            with open(os.path.splitext(fname)[0] + ".sublime-syntax", "w",
+                encoding="utf-8") as f:
+                data = to_yaml(convert(sys.argv[1]))
+                data = "\n".join([l.rstrip() for l in data.splitlines()]) + "\n"
+                f.write(data)
