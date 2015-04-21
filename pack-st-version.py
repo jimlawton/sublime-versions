@@ -14,9 +14,6 @@ import tarfile
 
 
 def main():
-    args = sys.argv
-    if len(args) <= 1:
-        sys.exit("ERROR: please supply a tar file!")
     if not os.path.exists("sublime_text_3"):
         sys.exit("ERROR: no sublime_text_3 directory!")
     # Make tempdir for archive.
