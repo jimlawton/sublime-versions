@@ -1,3 +1,16 @@
+Build 3067
+----------
+Release Date: 30 Jan 2015
+
+    * Right clicking on a URL will show an 'Open URL' menu item
+    * Improved Console Panel scrolling behavior
+    * Linux: Improved sudo save system compatibility
+    * OSX: subl command line tool no longer uses Distributed Objects, resolving some intermittent failures
+    * .tmLanguage files may contain a <hidden> element, to indicate they shouldn't be displayed to the user
+    * Fixed a crash that occurred when dragging rows scrolled out of view in the side bar
+    * Fixed not being able to click on the selected row of the auto complete popup
+    * Fixed a typo in the "Save Workspace As" dialog
+
 Build 3066
 ----------
 Release Date: 16 Oct 2014

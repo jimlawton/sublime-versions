@@ -1,4 +1,6 @@
 [
+    { "command": "open_context_url" },
+    { "caption": "-", "id": "clipboard" },
     { "command": "copy" },
     { "command": "cut" },
     { "command": "paste" },

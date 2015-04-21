@@ -826,6 +826,12 @@ class View(object):
         """ Converts a point in layout coordinates to a text coodinate """
         return sublime_api.view_layout_to_text(self.view_id, xy)
 
+    def window_to_layout(self, xy):
+        return sublime_api.view_window_to_layout(self.view_id, xy)
+
+    def window_to_text(self, xy):
+        return self.layout_to_text(self.window_to_layout(xy))
+
     def line_height(self):
         """ Returns the height of a line in layout coordinates """
         return sublime_api.view_line_height(self.view_id)
