@@ -1,3 +1,23 @@
+Build 3068
+----------
+Release Date: 3 Feb 2015
+
+    * Added Goto Definition to the context menu
+    * Added <current file> option to Find in Files
+    * Added spelling_selector setting, to control what text is checked for misspellings
+    * Misspelled words can now be added to the dictionary, in addition to being ignored
+    * Fixed Ignored Words not persisting after exiting
+    * Improved some error messages when parsing .tmLanguage files
+    * Improved URL detection in Open URL context menu item (thanks iamntz and facelessuser)
+    * Fixed incorrect menu mnemonics
+    * OSX: Added logging when FSEvents API returns failure
+    * Fixed a crash regression in 3067 triggered by renaming files
+    * Fixed sidebar icons sometimes being invisible on startup
+    * API: Added sublime.yes_no_cancel_dialog()
+    * API: Added sublime.expand_variables()
+    * API: Added Window.extract_variables()
+    * API: Added Sheet.view()
+
 Build 3067
 ----------
 Release Date: 30 Jan 2015

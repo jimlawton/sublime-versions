@@ -49,6 +49,10 @@ CLASS_EMPTY_LINE = 256
 INHIBIT_WORD_COMPLETIONS = 8
 INHIBIT_EXPLICIT_COMPLETIONS = 16
 
+DIALOG_CANCEL = 0
+DIALOG_YES = 1
+DIALOG_NO = 2
+
 def version():
     return sublime_api.version()
 
@@ -91,12 +95,16 @@ def message_dialog(msg):
 def ok_cancel_dialog(msg, ok_title = ""):
     return sublime_api.ok_cancel_dialog(msg, ok_title)
 
+def yes_no_cancel_dialog(msg, yes_title = "", no_title = ""):
+    return sublime_api.yes_no_cancel_dialog(msg, yes_title, no_title)
+
 def run_command(cmd, args = None):
     sublime_api.run_command(cmd, args)
 
 def get_clipboard(size_limit = 16777216):
     """ Returns the content of the clipboard, for performance reason if the size
-    of the clipboard content is bigger than size_limit, empty string will be returned
+    of the clipboard content is bigger than size_limit, an empty string will be
+    returned
     """
     return sublime_api.get_clipboard(size_limit)
 
@@ -145,6 +153,9 @@ def decode_value(data):
         raise ValueError(err)
 
     return val
+
+def expand_variables(val, variables):
+    return sublime_api.expand_variables(val, variables)
 
 def load_settings(base_name):
     settings_id = sublime_api.load_settings(base_name)
@@ -394,6 +405,9 @@ class Window(object):
         """ Finds all files and locations where sym in defined, searching through open files """
         return sublime_api.window_lookup_symbol_in_open_files(self.window_id, sym)
 
+    def extract_variables(self):
+        return sublime_api.window_extract_variables(self.window_id)
+
 
 class Edit(object):
     def __init__(self, token):
@@ -542,6 +556,13 @@ class Sheet(object):
             return None
         else:
             return Window(window_id)
+
+    def view(self):
+        view_id = sublime_api.sheet_view(self.sheet_id)
+        if view_id == 0:
+            return None
+        else:
+            return View(view_id)
 
 class View(object):
     def __init__(self, id):

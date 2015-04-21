@@ -684,7 +684,12 @@ multi_importer = MultizipImporter()
 sys.meta_path.insert(0, multi_importer)
 
 def update_compressed_packages(pkgs):
-    multi_importer.loaders = [ZipLoader(p) for p in pkgs]
+    multi_importer.loaders = []
+    for p in pkgs:
+        try:
+            multi_importer.loaders.append(ZipLoader(p))
+        except (FileNotFoundError, zipfile.BadZipFile) as e:
+            print("error loading " + p + ": " + str(e))
 
 def set_override_path(path):
     global override_path

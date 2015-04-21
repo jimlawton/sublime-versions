@@ -93,6 +93,9 @@
     // Word list to use for spell checking
     "dictionary": "Packages/Language - English/en_US.dic",
 
+    // Sets which scopes are checked for spelling errors
+    "spelling_selector": "markup.raw, source string.quoted - punctuation - meta.preprocessor.c.include, source comment - source comment.block.preprocessor, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag)",
+
     // Set to true to draw a border around the visible rectangle on the minimap.
     // The color of the border will be determined by the "minimapBorder" key in
     // the color scheme
@@ -348,8 +351,9 @@
     "create_window_at_startup": true,
 
     // Set to true to close windows as soon as the last file is closed, unless
-    // there's a folder open within the window. This is always enabled on OS X,
-    // changing it here won't modify the behavior.
+    // there's a folder open within the window.
+    // On OS X, this value is overridden in the platform specific settings, so
+    // you'll need to place this line in your user settings to override it.
     "close_windows_when_empty": false,
 
     // Show the full path to files in the title bar.

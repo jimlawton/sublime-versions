@@ -133,7 +133,8 @@
             { "command": "revert", "caption": "Revert File", "mnemonic": "v" },
             { "command": "close_all", "caption": "Close All Files" },
             { "caption": "-", "id": "exit" },
-            { "command": "exit", "mnemonic": "x" }
+            { "command": "exit", "caption": "Exit", "mnemonic": "x", "platform": "Windows" },
+            { "command": "exit", "caption": "Quit", "mnemonic": "Q", "platform": "Linux" },
         ]
     },
     {
@@ -154,7 +155,7 @@
             },
             { "caption": "-", "id": "clipboard" },
             { "command": "copy", "mnemonic": "C" },
-            { "command": "cut", "mnemonic": "n" },
+            { "command": "cut", "mnemonic": "t" },
             { "command": "paste", "mnemonic": "P" },
             { "command": "paste_and_indent", "mnemonic": "I" },
             { "command": "paste_from_history", "caption": "Paste from History" },
@@ -575,7 +576,7 @@
                 ]
             },
             { "caption": "-", "id": "settings" },
-            { "command": "toggle_setting", "args": {"setting": "word_wrap"}, "caption": "Word Wrap", "mnemonic": "w", "checkbox": true },
+            { "command": "toggle_setting", "args": {"setting": "word_wrap"}, "caption": "Word Wrap", "mnemonic": "W", "checkbox": true },
             {
                 "caption": "Word Wrap Column",
                 "children":
@@ -669,7 +670,7 @@
             },
             {
                 "caption": "Bookmarks",
-                "mnemonic": "b",
+                "mnemonic": "B",
                 "id": "bookmarks",
                 "children":
                 [
@@ -762,7 +763,7 @@
     {
         "caption": "Project",
         "id": "project",
-        "mnemonic": "p",
+        "mnemonic": "P",
         "children":
         [
             { "command": "prompt_open_project_or_workspace", "caption": "Open Project…" },

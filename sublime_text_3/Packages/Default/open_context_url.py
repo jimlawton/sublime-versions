@@ -1,6 +1,11 @@
-import sublime, sublime_plugin
+import sublime_plugin
 import webbrowser
 import re
+
+rex = re.compile(r'''(?x)
+    (?:https?://[a-zA-Z0-9.-]+|www\.[a-zA-Z0-9.-]+)
+    [A-Za-z0-9._~:/?#\[\]@!$&'()*+,;=-]*
+''')
 
 class OpenContextUrlCommand(sublime_plugin.TextCommand):
     def run(self, edit, event):
@@ -8,7 +13,7 @@ class OpenContextUrlCommand(sublime_plugin.TextCommand):
         webbrowser.open_new_tab(url)
 
     def is_visible(self, event):
-        return self.find_url(event) != None
+        return self.find_url(event) is not None
 
     def find_url(self, event):
         pt = self.view.window_to_text((event["x"], event["y"]))
@@ -19,11 +24,15 @@ class OpenContextUrlCommand(sublime_plugin.TextCommand):
 
         text = self.view.substr(line)
 
-        it = re.finditer(r"\bhttp(s)?://[^ \t]+", text)
+        it = rex.finditer(text)
 
         for match in it:
             if match.start() <= (pt - line.a) and match.end() >= (pt - line.a):
-                return text[match.start():match.end()]
+                url = text[match.start():match.end()]
+                if url[0:3] == "www":
+                    return "http://" + url
+                else:
+                    return url
 
         return None
 
