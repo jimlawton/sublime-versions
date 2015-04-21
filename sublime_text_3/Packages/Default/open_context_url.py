@@ -2,10 +2,15 @@ import sublime_plugin
 import webbrowser
 import re
 
-rex = re.compile(r'''(?x)
-    (?:https?://[a-zA-Z0-9.-]+|www\.[a-zA-Z0-9.-]+)
-    [A-Za-z0-9._~:/?#\[\]@!$&'()*+,;=-]*
-''')
+rex = re.compile(
+    r'''(?x)
+    \b(?:
+        https?://(?:(?:[a-zA-Z0-9\-_]+(?:\.[a-zA-Z0-9\-._]+)+)|localhost)|  # http://
+        www\.[a-zA-Z0-9\-_]+(?:\.[a-zA-Z0-9\-._]+)+                         # www.
+    )
+    /?[a-zA-Z0-9\-._?,!'(){}\[\]/+&@%$#=:"|~;]*                             # url path and query string
+    [a-zA-Z0-9\-_~:/#@$*+=]                                                 # allowed end chars
+    ''')
 
 class OpenContextUrlCommand(sublime_plugin.TextCommand):
     def run(self, edit, event):

@@ -51,7 +51,8 @@ def navigate_to_symbol(view, symbol, locations):
         fname, display_fname, rowcol = l
         row, col = rowcol
 
-        v = window.open_file(fname + ":" + str(row) + ":" + str(col), sublime.ENCODED_POSITION)
+        v = window.open_file(fname + ":" + str(row) + ":" + str(col),
+            sublime.ENCODED_POSITION)
 
     def select_entry(window, locations, idx, orig_view, orig_sel):
         if idx >= 0:
@@ -66,7 +67,9 @@ def navigate_to_symbol(view, symbol, locations):
         row, col = rowcol
 
         window.open_file(fname + ":" + str(row) + ":" + str(col),
-            sublime.TRANSIENT | sublime.ENCODED_POSITION)
+            group = window.active_group(),
+            # flags = sublime.TRANSIENT | sublime.ENCODED_POSITION | sublime.FORCE_GROUP)
+            flags = sublime.TRANSIENT | sublime.ENCODED_POSITION)
 
     def format_location(l):
         fname, display_fname, rowcol = l

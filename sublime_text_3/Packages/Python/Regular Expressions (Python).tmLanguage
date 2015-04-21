@@ -14,6 +14,8 @@
 	<string>(\*/|\}|\))</string>
 	<key>name</key>
 	<string>Regular Expressions (Python)</string>
+	<key>hidden</key>
+	<true/>
 	<key>patterns</key>
 	<array>
 		<dict>

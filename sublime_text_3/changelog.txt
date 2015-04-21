@@ -1,3 +1,20 @@
+Build 3070
+----------
+Release Date: 17 Feb 2015
+
+    * API: Added View.show_popup() and related functions
+    * Added auto_complete_cycle setting
+    * Fixed Minimap refusing to draw on very large windows
+    * Tweaked handling of syntax definitions and unused captures, resolving an issue with spell checking in Markdown links.
+    * Improved behavior of Goto Definition when using multiple panes
+    * Fixed tmLanguages files with the hidden flag set appearing in the Command Palette
+    * Tweak to quote auto pairing logic
+    * Tweak to Open URL regex (thanks facelessuser)
+    * OSX: Added work around for performActionForItemAtIndex: taking an excessively long time in Yosemite. This affected any commands that had a corresponding menu item.
+    * API: Window.show_quick_panel() will now scroll to the selected item when shown
+    * API: Window.show_quick_panel() now accepts the flag sublime.KEEP_OPEN_ON_FOCUS_LOST
+    * API: Fixed on_post_window_command() not getting called
+
 Build 3069
 ----------
 Release Date: 4 Feb 2015

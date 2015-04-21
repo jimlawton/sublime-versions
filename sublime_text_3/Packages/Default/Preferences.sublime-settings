@@ -238,6 +238,12 @@
     // Only relevant if auto_complete_commit_on_tab is true.
     "auto_complete_with_fields": false,
 
+    // Controls what happens when pressing the up key while the first item in
+    // the auto complete window is selected: if false, the window is hidden,
+    // otherwise the last item in the window is selected. Likewise for the
+    // down key when the last item is selected.
+    "auto_complete_cycle": true,
+
     // Automatically close HTML and XML tags when </ is entered.
     "auto_close_tags": true,
 

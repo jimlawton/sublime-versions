@@ -17,6 +17,8 @@ FORCE_GROUP = 8
 IGNORECASE = 2
 LITERAL = 1
 MONOSPACE_FONT = 1
+KEEP_OPEN_ON_FOCUS_LOST = 2
+HTML = 1
 
 DRAW_EMPTY = 1
 HIDE_ON_MINIMAP = 2
@@ -346,6 +348,7 @@ class Window(object):
         """
         on_select is called when the the quick panel is finished, and should accept a single integer, specifying which item was selected, or -1 for none
         on_highlight is called when the quick panel is still active, and indicates the current highlighted index
+        flags is a bitwise OR of MONOSPACE_FONT, and KEEP_OPEN_ON_FOCUS_LOST
         """
         items_per_row = 1
         flat_items = items
@@ -942,6 +945,20 @@ class View(object):
         return sublime_api.view_show_popup_table(self.view_id, items,
             on_select, flags, -1)
 
+    def show_popup(self, content, flags = HTML, location = -1,
+        max_width = 320, max_height = 240,
+        on_navigate = None, on_hide = None):
+        sublime_api.view_show_popup(self.view_id, location, content,
+            flags, max_width, max_height, on_navigate, on_hide)
+
+    def update_popup(self, content):
+        sublime_api.view_update_popup_content(self.view_id, content)
+
+    def is_popup_visible(self):
+        return sublime_api.view_is_popup_visible(self.view_id)
+
+    def hide_popup(self):
+        sublime_api.view_hide_popup(self.view_id)
 
 class Settings(object):
     def __init__(self, id):
