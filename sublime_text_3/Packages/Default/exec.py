@@ -180,7 +180,7 @@ class ExecCommand(sublime_plugin.WindowCommand, ProcessListener):
         if not self.quiet:
             if shell_cmd:
                 print("Running " + shell_cmd)
-            else:
+            elif cmd:
                 print("Running " + " ".join(cmd))
             sublime.status_message("Building")
 

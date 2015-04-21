@@ -711,29 +711,8 @@
             { "command": "show_overlay", "args": {"overlay": "command_palette"}, "caption": "Command Palette…" },
             { "command": "show_overlay", "args": {"overlay": "command_palette", "text": "Snippet: "}, "caption": "Snippets…" },
             { "caption": "-", "id": "build" },
-            {
-                "caption": "Build System",
-                "mnemonic": "u",
-                "children":
-                [
-                    { "command": "set_build_system", "args": { "file": "" }, "caption": "Automatic", "checkbox": true },
-                    { "caption": "-" },
-                    { "command": "set_build_system", "args": {"index": 0}, "checkbox": true },
-                    { "command": "set_build_system", "args": {"index": 1}, "checkbox": true },
-                    { "command": "set_build_system", "args": {"index": 2}, "checkbox": true },
-                    { "command": "set_build_system", "args": {"index": 3}, "checkbox": true },
-                    { "command": "set_build_system", "args": {"index": 4}, "checkbox": true },
-                    { "command": "set_build_system", "args": {"index": 5}, "checkbox": true },
-                    { "command": "set_build_system", "args": {"index": 6}, "checkbox": true },
-                    { "command": "set_build_system", "args": {"index": 7}, "checkbox": true },
-                    { "caption": "-" },
-                    { "command": "$build_systems" },
-                    { "caption": "-" },
-                    { "command": "new_build_system", "caption": "New Build System…" }
-                ]
-            },
             { "command": "build", "mnemonic": "B" },
-            { "command": "build", "args": {"variant": "Run"}, "mnemonic": "R" },
+            { "command": "show_overlay", "args": {"overlay": "command_palette", "text": "Build With: "}, "caption": "Build With…" },
             { "command": "exec", "args": {"kill": true}, "caption": "Cancel Build", "mnemonic": "C" },
             {
                 "caption": "Build Results",
@@ -877,6 +856,7 @@
             { "command": "remove_license"},
             { "caption": "-" },
             { "command": "update_check", "caption": "Check for Updates…", "platform": "!Linux" },
+            { "command": "show_changelog", "caption": "Changelog…" },
             { "command": "show_about_window", "caption": "About Sublime Text", "mnemonic": "A" }
         ]
     }

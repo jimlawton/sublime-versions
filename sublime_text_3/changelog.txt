@@ -1,381 +1,497 @@
-Build 3071
-----------
-Release Date: 20 Feb 2015
-
-    * API: Added COOPERATE_WITH_AUTO_COMPLETE flag for View.show_popup()
-    * Properly improved behavior of Goto Definition when using multiple panes
-    * Fixed a bug with scrolling tabs, where a 1 pixel line would occasionally appear underneath them
-    * minihtml: Added support for trivial tags small, code, em, var, and strong
-    * minihtml: Fixed units not being assigned correctly when using shorthand notation
-    * Windows: Popup windows are now able to receive scroll wheel input
-    * API: Fixed a regression 3070 where Window.show_quick_panel() incorrectly reported the highlighted item
-    * API: Fixed a crash caused by passing an empty string into View.show_popup()
-
-Build 3070
-----------
-Release Date: 17 Feb 2015
-
-    * API: Added View.show_popup() and related functions
-    * Added auto_complete_cycle setting
-    * Fixed Minimap refusing to draw on very large windows
-    * Tweaked handling of syntax definitions and unused captures, resolving an issue with spell checking in Markdown links.
-    * Improved behavior of Goto Definition when using multiple panes
-    * Fixed tmLanguages files with the hidden flag set appearing in the Command Palette
-    * Tweak to quote auto pairing logic
-    * Tweak to Open URL regex (thanks facelessuser)
-    * OSX: Added work around for performActionForItemAtIndex: taking an excessively long time in Yosemite. This affected any commands that had a corresponding menu item.
-    * API: Window.show_quick_panel() will now scroll to the selected item when shown
-    * API: Window.show_quick_panel() now accepts the flag sublime.KEEP_OPEN_ON_FOCUS_LOST
-    * API: Fixed on_post_window_command() not getting called
-
-Build 3069
-----------
-Release Date: 4 Feb 2015
-
-    * Fixed a crash regression in 3068 when typing in a transient sheet
-    * Fixed a long standing issue with spell checking and non-ascii characters
-    * API: Fixed sublime.yes_no_cancel dialog return value on Windows
-
-Build 3068
-----------
-Release Date: 3 Feb 2015
-
-    * Added Goto Definition to the context menu
-    * Added <current file> option to Find in Files
-    * Added spelling_selector setting, to control what text is checked for misspellings
-    * Misspelled words can now be added to the dictionary, in addition to being ignored
-    * Fixed Ignored Words not persisting after exiting
-    * Improved some error messages when parsing .tmLanguage files
-    * Improved URL detection in Open URL context menu item (thanks iamntz and facelessuser)
-    * Fixed incorrect menu mnemonics
-    * OSX: Added logging when FSEvents API returns failure
-    * Fixed a crash regression in 3067 triggered by renaming files
-    * Fixed sidebar icons sometimes being invisible on startup
-    * API: Added sublime.yes_no_cancel_dialog()
-    * API: Added sublime.expand_variables()
-    * API: Added Window.extract_variables()
-    * API: Added Sheet.view()
-
-Build 3067
-----------
-Release Date: 30 Jan 2015
-
-    * Right clicking on a URL will show an 'Open URL' menu item
-    * Improved Console Panel scrolling behavior
-    * Linux: Improved sudo save system compatibility
-    * OSX: subl command line tool no longer uses Distributed Objects, resolving some intermittent failures
-    * .tmLanguage files may contain a <hidden> element, to indicate they shouldn't be displayed to the user
-    * Fixed a crash that occurred when dragging rows scrolled out of view in the side bar
-    * Fixed not being able to click on the selected row of the auto complete popup
-    * Fixed a typo in the "Save Workspace As" dialog
-
-Build 3066
-----------
-Release Date: 16 Oct 2014
-
-    * Linux: Added sudo save
-    * Windows: subl.exe command line helper accepts wildcards
-    * Improved handling of build systems that generate lots of output
-    * Build Systems may now declare a "keyfile" (e.g., 'Makefile' for the Make build system) to better auto detect which build system to use
-    * When opening a project with a build system, that build system is now selected by default
-    * New windows now always use the automatic build system, rather than the build system of the last used window
-    * Goto Anything supports :line:col syntax in addition to :line
-
-Build 3064
-----------
-Release Date: 27 Aug 2014
-
-    * Added remember_full_screen setting
-    * Posix: Fixed a file permission regression in 3063
-
-Build 3063
-----------
-Release Date: 26 Aug 2014
-
-    * Improved quote auto pairing logic
-    * Selected group is now stored in the session
-    * Fixed a crash triggered by Goto Anything cloning views
-    * Windows: Added command line helper, subl.exe
-    * OSX: Added 'New Window' entry to dock menu
-    * Posix: Using correct permissions for newly created files and folders
-
-Build 3062
-----------
-Release Date: 5 May 2014
-
-    * Added sidebar icons
-    * Added sidebar loading indicators
-    * Sidebar remembers which folders are expanded
-    * Fixed a crash in plugin_host
-
-Build 3061
-----------
-Release Date: 21 December 2013
-
-    * API: Updated to Python 3.3.3
-    * Tweaked window closing behavior when pressing ctrl+w / cmd+w
-    * Fixed a lockup when transitioning from a blinking to a solid caret
-
-Build 3058
-----------
-Release Date: 12 December 2013
-
-    * Added index_exclude_patterns setting to control which files get indexed
-    * Fixed a crash regression in 3057
-
-Build 3057
-----------
-Release Date: 10 December 2013
-
-    * Added settings caret_extra_top, caret_extra_bottom and caret_extra_width to control the caret size
-    * Added settings show_encoding and show_line_endings to control what gets shown on the status bar
-
-Build 3056
-----------
-Release Date: 20 November 2013
-
-    * Transparent images are drawn with a checkerboard background
-    * Fixed Find in Files not selecting the correct line for already opened files
-    * Windows: Fixed extraneous .tmp files when saving
-    * Vintage: Improved behavior of visual line mode with word wrapped lines
-
-Build 3055
-----------
-Release Date: 19 November 2013
-
-    * Added image preview when opening images
-    * Encoding and line endings are displayed in the status bar
-    * Linux: Fixed a menu hiding issue
-    * Find in Files will no longer block when FIFOs are encountered
-
-Build 3054
-----------
-Release Date: 16 October 2013
-
-    * Fixed incorrect title bar in new sessions
-    * Auto complete now works as expected in macros
-    * Vintage: A block caret is now used
-    * Linux: Fixed menu hiding not restoring correctly at startup
-    * Linux: Fixed incorrect underscore display in some menus
-
-Build 3053
-----------
-Release Date: 30 August 2013
-
-    * Ctrl+Tab ordering is stored in the session
-    * Fixed an atomic save file permission regression for newly created files
-    * When the last file is closed, a new transient file is created automatically
-    * Linux: Added menu hiding
-    * API: Window.open_file now accepts an optional group parameter
-
-Build 3052
-----------
-Release Date: 23 July 2013
-
-    * API: Calling Settings.add_on_change() from within a settings change callback won't cause the added callback to be run
-    * Fixed a crash in 3050
-
-Build 3050
-----------
-Release Date: 22 July 2013
-
-    * Fixed a crash regression in 3049
-    * Minor improvements to Python syntax highlighting
-
-Build 3049
-----------
-Release Date: 19 July 2013
-
-    * Tab scrolling now works with mouse wheels
-    * Changed tab close behavior: the neighboring tab is now always selected
-    * Linux: Fixed incorrect handling of double clicks in the Find panel
-    * Windows: Fixed hidden attribute regression in 3048 when atomic_save is disabled
-    * Fixed a crash related to tab scrolling
-    * API: Plugins may now call Settings.clear_on_change() within a callback from Settings.add_on_change()
-
-Build 3048
-----------
-Release Date: 10 July 2013
-
-    * Added tab scrolling, controlled by the enable_tab_scrolling setting
-    * Automatically closing windows when the last tab is dragged out
-    * Added minimap_scroll_to_clicked_text setting
-    * Improved error messages when unable to save files
-    * font_options is now case insensitive
-    * Posix: Fixes new files being created with unexpected permissions
-    * Windows: SSE support is no longer required for 32 bit builds
-
-Build 3046
-----------
-Release Date: 26 June 2013
-
-    * API: Supporting a distinction between Python modules and packages, to ensure relative imports work as expected
-
-Build 3045
-----------
-Release Date: 25 June 2013
-
-    * Windows: Fixed plugin overriding
-
-Build 3044
-----------
-Release Date: 24 June 2013
-
-    * Improved handling of Python sub-package importing, fixing the delete from side bar regression
-
-Build 3043
-----------
-Release Date: 21 June 2013
-
-    * Deleted files are marked as dirty again
-    * Fixed a regression when overriding the color scheme in syntax specific settings
-    * Linux and OSX: atomic_save is adaptively disabled when it's not possible to preserve file permissions
-    * API: Fixed settings objects getting invalidated too early with cloned views
-    * API: Plugins in zip files are able to be overridden via files on disk
-
-Build 3041
-----------
-Release Date: 14 June 2013
-
-    * Fixed file change detection regression in 3040
-    * Windows: Fixed a crash introduced in 3034
-
-Build 3040
-----------
-Release Date: 13 June 2013
-
-    * Fixed a crash on exit that could occur when hot_exit is disabled
-    * Fixed a crash introduced in 3036
-    * Windows: DirectWrite support uses the old path when drawing from a the text buffer
-    * Windows: Auto updater supports updating from unicode paths
-    * API: Added support for the termios module on Linux and OS X.
-
-Build 3038
-----------
-Release Date: 9 June 2013
-
-    * Fixed further regressions in 3036
-
-Build 3037
-----------
-Release Date: 4 June 2013
-
-    * Fixed a regressions in 3036
-
-Build 3036
-----------
-Release Date: 4 June 2013
-
-    * Fixed regressions in file change detection
-    * Linux: Added support for High DPI, controlled by the GTK Text Scaling Factor
-    * Windows: DirectWrite is enabled automatically in high DPI mode
-    * OSX: Fixed context menus not working when the application is in the background
-
-Build 3035
-----------
-Release Date: 17 May 2013
-
-    * Restored Windows XP compatibility
-    * Fixed an OSX crash
-    * Fixed double closing of script tags
-
-Build 3034
-----------
-Release Date: 16 May 2013
-
-    * Improved file change detection
-    * Windows: Added high DPI support
-    * Graphics rendering ported to Skia from Cairo
-    * HTML tag auto completion is better behaved in script tags
-    * API: Fixed Selection.contains
-
-Build 3032
-----------
-Release Date: 6 May 2013
-
-    * Added setting always_prompt_for_file_reload
-    * Pressing right in the Goto Anything overlay will open the selected file without closing the overlay
-    * Improved handling of deleted files when restoring sessions
-    * Linux: Fixed popup menu positioning
-    * Windows: Fixed erroneous entries in system menu
-
-Build 3031
-----------
-Release Date: 1 May 2013
-
-    * Find panel has a drop down arrow to select previous items
-    * Minor Auto Complete visual tweaks
-    * API: Added view.show_popup_menu()
-    * API: Added is_valid() method to view and window, to determine if the handle has been invalidated
-
-Build 3030
-----------
-Release Date: 23 April 2013
-
-    * Fixed crash introduced in 3029
-
-Build 3029
-----------
-Release Date: 22 April 2013
-
-    * Fix for rare crash
-    * Telemetry is enabled by default for dev builds
-    * Improved Minimap hover logic
-    * Faster startup time
-
-Build 3028
-----------
-Release Date: 16 April 2013
-
-    * Fixed a regression in 3027
-
-Build 3027
-----------
-Release Date: 15 April 2013
-
-    * Fixed several rare crashes
-    * Improved HTML completions when typing outside of tags
-    * Fixed Close Tag not respecting self closing tags
-    * Windows: Fixed auto updates not installing when the application is installed to a drive other than C
-
-Build 3026
-----------
-Release Date: 10 April 2013
-
-    * auto_find_in_selection defaults to false as intended
-    * Fixed a sidebar regression in 3024
-    * Windows: Fixed an 'Open in Sublime Text' regression introduced in 3024
-    * Improved handling of packages with non-utf8 encoded .py files
-
-Build 3025
-----------
-Release Date: 9 April 2013
-
-    * Fixed some regressions in 3024
-    * Added Paste from History
-    * API: on_text_command and on_window command are now called when the menu is used
-    * API: Added on_post_text_command and on_post_window_command
-
-Build 3024
-----------
-Release Date: 8 April 2013
-
-    * Semi-transient sheets are no longer shown in the OPEN FILES section of the side bar
-    * Added setting 'auto_find_in_selection', for S2 style Find in Selection logic
-    * Using Google Breakpad to automatically report crashes
-    * Symlinks are followed by default in folders added to the side bar
-    * PHP: Improved auto indenting for the alternative control syntax
-    * "Remove all Folders from Project" now prompts to confirm
-    * Deleting a file via the side bar will first close the corresponding view, if any
-    * Update window will display properly even if the theme doesn't have rules for it
-    * Windows: New style Open Folder dialogs are used on Vista and later
-    * API: Added view.close()
-    * API: Added sublime.get_macro()
-
-Build 3023
-----------
-Release Date: 3 April 2013
-
-    * New auto update system for Windows and OS X
-    * Added telemetry. Telemetry is currently disabled by default, but will be enabled by default in future dev builds. It can be explicitly controlled with the enable_telemetry setting
-    * API: Fixed a memory leak in plugin_host
+<style>
+html { background-color: #f6f6f6; }
+body { font-family: monospace; }
+li { margin: 2px; }
+h2 { color: #333; font-size: 2.0em; margin: 0; }
+.release-date, .forum-link { font-size: 10pt }
+</style>
+
+<h2>Build 3072</h2>
+<div class="release-date">Release Date: 27 February 2015</div>
+<div class="forum-link">See also the <a href="http://www.sublimetext.com/forum/viewtopic.php?f=2&t=17658">Forum Thread</a></div>
+<ul>
+    <li>Changelog is now in HTML :)</li>
+    <li>Reworked how Build Systems are selected (<a href="http://www.sublimetext.com/forum/viewtopic.php?f=2&t=17471">More Information</a>) </li>
+    <li>Fixed Redo sometimes restoring the selection to the incorrect location</li>
+    <li>Command Palette now remembers the last entered string</li>
+    <li><tt>atomic_save</tt> is disabled by default</li>
+    <li>Fixed tabset background being set to the wrong color on startup if different colored tabs are used</li>
+    <li>Improved scrolling behavior when <tt>line_padding_top</tt> is &gt; 0</li>
+    <li>minihtml: Added support for &lt;img&gt; tags, in conjunction with file://, res:// and data: URLs</li>
+    <li>minihtml: Added support &lt;ul&gt; and &lt;li&gt; elements</li>
+    <li>minihtml: Added support for padding</li>
+    <li>minihtml: Added support background-color on inline elements</li>
+</ul>
+
+<h2>Build 3071</h2>
+<div class="release-date">Release Date: 20 February 2015</div>
+<div class="forum-link">See also the <a href="http://www.sublimetext.com/forum/viewtopic.php?f=2&t=17610">Forum Thread</a></div>
+<ul>
+    <li>API: Added COOPERATE_WITH_AUTO_COMPLETE flag for View.show_popup()</li>
+    <li>Properly improved behavior of Goto Definition when using multiple panes</li>
+    <li>Fixed a bug with scrolling tabs, where a 1 pixel line would occasionally appear underneath them</li>
+    <li>minihtml: Added support for trivial tags small, code, em, var, and strong</li>
+    <li>minihtml: Fixed units not being assigned correctly when using shorthand notation</li>
+    <li>Windows: Popup windows are now able to receive scroll wheel input</li>
+    <li>API: Fixed a regression 3070 where Window.show_quick_panel() incorrectly reported the highlighted item</li>
+    <li>API: Fixed a crash caused by passing an empty string into View.show_popup()</li>
+</ul>
+
+<h2>Build 3070</h2>
+<div class="release-date">Release Date: 17 February 2015</div>
+<ul>
+    <li>API: Added View.show_popup() and related functions</li>
+    <li>Added auto_complete_cycle setting</li>
+    <li>Fixed Minimap refusing to draw on very large windows</li>
+    <li>Tweaked handling of syntax definitions and unused captures, resolving an issue with spell checking in Markdown links.</li>
+    <li>Improved behavior of Goto Definition when using multiple panes</li>
+    <li>Fixed tmLanguages files with the hidden flag set appearing in the Command Palette</li>
+    <li>Tweak to quote auto pairing logic</li>
+    <li>Tweak to Open URL regex (thanks facelessuser)</li>
+    <li>OSX: Added work around for performActionForItemAtIndex: taking an excessively long time in Yosemite. This affected any commands that had a corresponding menu item.</li>
+    <li>API: Window.show_quick_panel() will now scroll to the selected item when shown</li>
+    <li>API: Window.show_quick_panel() now accepts the flag sublime.KEEP_OPEN_ON_FOCUS_LOST</li>
+    <li>API: Fixed on_post_window_command() not getting called</li>
+</ul>
+
+<h2>Build 3069</h2>
+<div class="release-date">Release Date: 4 February 2015</div>
+<ul>
+    <li>Fixed a crash regression in 3068 when typing in a transient sheet</li>
+    <li>Fixed a long standing issue with spell checking and non-ascii characters</li>
+    <li>API: Fixed sublime.yes_no_cancel dialog return value on Windows</li>
+</ul>
+
+<h2>Build 3068</h2>
+<div class="release-date">Release Date: 3 February 2015</div>
+<ul>
+    <li>Added Goto Definition to the context menu</li>
+    <li>Added &lt;current file&gt; option to Find in Files</li>
+    <li>Added spelling_selector setting, to control what text is checked for misspellings</li>
+    <li>Misspelled words can now be added to the dictionary, in addition to being ignored</li>
+    <li>Fixed Ignored Words not persisting after exiting</li>
+    <li>Improved some error messages when parsing .tmLanguage files</li>
+    <li>Improved URL detection in Open URL context menu item (thanks iamntz and facelessuser)</li>
+    <li>Fixed incorrect menu mnemonics</li>
+    <li>OSX: Added logging when FSEvents API returns failure</li>
+    <li>Fixed a crash regression in 3067 triggered by renaming files</li>
+    <li>Fixed sidebar icons sometimes being invisible on startup</li>
+    <li>API: Added sublime.yes_no_cancel_dialog()</li>
+    <li>API: Added sublime.expand_variables()</li>
+    <li>API: Added Window.extract_variables()</li>
+    <li>API: Added Sheet.view()</li>
+</ul>
+
+<h2>Build 3067</h2>
+<div class="release-date">Release Date: 30 January 2015</div>
+<ul>
+    <li>Right clicking on a URL will show an 'Open URL' menu item</li>
+    <li>Improved Console Panel scrolling behavior</li>
+    <li>Linux: Improved sudo save system compatibility</li>
+    <li>OSX: subl command line tool no longer uses Distributed Objects, resolving some intermittent failures</li>
+    <li>.tmLanguage files may contain a &lt;hidden&gt; element, to indicate they shouldn't be displayed to the user</li>
+    <li>Fixed a crash that occurred when dragging rows scrolled out of view in the side bar</li>
+    <li>Fixed not being able to click on the selected row of the auto complete popup</li>
+    <li>Fixed a typo in the "Save Workspace As" dialog</li>
+</ul>
+
+<h2>Build 3066</h2>
+<div class="release-date">Release Date: 16 October 2014</div>
+<ul>
+    <li>Linux: Added sudo save</li>
+    <li>Windows: subl.exe command line helper accepts wildcards</li>
+    <li>Improved handling of build systems that generate lots of output</li>
+    <li>Build Systems may now declare a "keyfile" (e.g., 'Makefile' for the Make build system) to better auto detect which build system to use</li>
+    <li>When opening a project with a build system, that build system is now selected by default</li>
+    <li>New windows now always use the automatic build system, rather than the build system of the last used window</li>
+    <li>Goto Anything supports :line:col syntax in addition to :line</li>
+</ul>
+
+<h2>Build 3064</h2>
+<div class="release-date">Release Date: 27 August 2014</div>
+<ul>
+    <li>Added remember_full_screen setting</li>
+    <li>Posix: Fixed a file permission regression in 3063</li>
+</ul>
+
+<h2>Build 3063</h2>
+<div class="release-date">Release Date: 26 August 2014</div>
+<ul>
+    <li>Improved quote auto pairing logic</li>
+    <li>Selected group is now stored in the session</li>
+    <li>Fixed a crash triggered by Goto Anything cloning views</li>
+    <li>Windows: Added command line helper, subl.exe</li>
+    <li>OSX: Added 'New Window' entry to dock menu</li>
+    <li>Posix: Using correct permissions for newly created files and folders</li>
+</ul>
+
+<h2>Build 3062</h2>
+<div class="release-date">Release Date: 5 May 2014</div>
+<ul>
+    <li>Added sidebar icons</li>
+    <li>Added sidebar loading indicators</li>
+    <li>Sidebar remembers which folders are expanded</li>
+    <li>Fixed a crash in plugin_host</li>
+</ul>
+
+<h2>Build 3061</h2>
+<div class="release-date">Release Date: 21 December 2013</div>
+<ul>
+    <li>API: Updated to Python 3.3.3</li>
+    <li>Tweaked window closing behavior when pressing ctrl+w / cmd+w</li>
+    <li>Fixed a lockup when transitioning from a blinking to a solid caret</li>
+</ul>
+
+<h2>Build 3058</h2>
+<div class="release-date">Release Date: 12 December 2013</div>
+<ul>
+    <li>Added index_exclude_patterns setting to control which files get indexed</li>
+    <li>Fixed a crash regression in 3057</li>
+</ul>
+
+<h2>Build 3057</h2>
+<div class="release-date">Release Date: 10 December 2013</div>
+<ul>
+    <li>Added settings caret_extra_top, caret_extra_bottom and caret_extra_width to control the caret size</li>
+    <li>Added settings show_encoding and show_line_endings to control what gets shown on the status bar</li>
+</ul>
+
+<h2>Build 3056</h2>
+<div class="release-date">Release Date: 20 November 2013</div>
+<ul>
+    <li>Transparent images are drawn with a checkerboard background</li>
+    <li>Fixed Find in Files not selecting the correct line for already opened files</li>
+    <li>Windows: Fixed extraneous .tmp files when saving</li>
+    <li>Vintage: Improved behavior of visual line mode with word wrapped lines</li>
+</ul>
+
+<h2>Build 3055</h2>
+<div class="release-date">Release Date: 19 November 2013</div>
+<ul>
+    <li>Added image preview when opening images</li>
+    <li>Encoding and line endings are displayed in the status bar</li>
+    <li>Linux: Fixed a menu hiding issue</li>
+    <li>Find in Files will no longer block when FIFOs are encountered</li>
+</ul>
+
+<h2>Build 3054</h2>
+<div class="release-date">Release Date: 16 October 2013</div>
+<ul>
+    <li>Fixed incorrect title bar in new sessions</li>
+    <li>Auto complete now works as expected in macros</li>
+    <li>Vintage: A block caret is now used</li>
+    <li>Linux: Fixed menu hiding not restoring correctly at startup</li>
+    <li>Linux: Fixed incorrect underscore display in some menus</li>
+</ul>
+
+<h2>Build 3053</h2>
+<div class="release-date">Release Date: 30 August 2013</div>
+<ul>
+    <li>Ctrl+Tab ordering is stored in the session</li>
+    <li>Fixed an atomic save file permission regression for newly created files</li>
+    <li>When the last file is closed, a new transient file is created automatically</li>
+    <li>Linux: Added menu hiding</li>
+    <li>API: Window.open_file now accepts an optional group parameter</li>
+</ul>
+
+<h2>Build 3052</h2>
+<div class="release-date">Release Date: 23 July 2013</div>
+<ul>
+    <li>API: Calling Settings.add_on_change() from within a settings change callback won't cause the added callback to be run</li>
+    <li>Fixed a crash in 3050</li>
+</ul>
+
+<h2>Build 3050</h2>
+<div class="release-date">Release Date: 22 July 2013</div>
+<ul>
+    <li>Fixed a crash regression in 3049</li>
+    <li>Minor improvements to Python syntax highlighting</li>
+</ul>
+
+<h2>Build 3049</h2>
+<div class="release-date">Release Date: 19 July 2013</div>
+<ul>
+    <li>Tab scrolling now works with mouse wheels</li>
+    <li>Changed tab close behavior: the neighboring tab is now always selected</li>
+    <li>Linux: Fixed incorrect handling of double clicks in the Find panel</li>
+    <li>Windows: Fixed hidden attribute regression in 3048 when atomic_save is disabled</li>
+    <li>Fixed a crash related to tab scrolling</li>
+    <li>API: Plugins may now call Settings.clear_on_change() within a callback from Settings.add_on_change()</li>
+</ul>
+
+<h2>Build 3048</h2>
+<div class="release-date">Release Date: 10 July 2013</div>
+<ul>
+    <li>Added tab scrolling, controlled by the enable_tab_scrolling setting</li>
+    <li>Automatically closing windows when the last tab is dragged out</li>
+    <li>Added minimap_scroll_to_clicked_text setting</li>
+    <li>Improved error messages when unable to save files</li>
+    <li>font_options is now case insensitive</li>
+    <li>Posix: Fixes new files being created with unexpected permissions</li>
+    <li>Windows: SSE support is no longer required for 32 bit builds</li>
+</ul>
+
+<h2>Build 3046</h2>
+<div class="release-date">Release Date: 26 June 2013</div>
+<ul>
+    <li>API: Supporting a distinction between Python modules and packages, to ensure relative imports work as expected</li>
+</ul>
+
+<h2>Build 3045</h2>
+<div class="release-date">Release Date: 25 June 2013</div>
+<ul>
+    <li>Windows: Fixed plugin overriding</li>
+</ul>
+
+<h2>Build 3044</h2>
+<div class="release-date">Release Date: 24 June 2013</div>
+<ul>
+    <li>Improved handling of Python sub-package importing, fixing the delete from side bar regression</li>
+</ul>
+
+<h2>Build 3043</h2>
+<div class="release-date">Release Date: 21 June 2013</div>
+<ul>
+    <li>Deleted files are marked as dirty again</li>
+    <li>Fixed a regression when overriding the color scheme in syntax specific settings</li>
+    <li>Linux and OSX: atomic_save is adaptively disabled when it's not possible to preserve file permissions</li>
+    <li>API: Fixed settings objects getting invalidated too early with cloned views</li>
+    <li>API: Plugins in zip files are able to be overridden via files on disk</li>
+</ul>
+
+<h2>Build 3041</h2>
+<div class="release-date">Release Date: 14 June 2013</div>
+<ul>
+    <li>Fixed file change detection regression in 3040</li>
+    <li>Windows: Fixed a crash introduced in 3034</li>
+</ul>
+
+<h2>Build 3040</h2>
+<div class="release-date">Release Date: 13 June 2013</div>
+<ul>
+    <li>Fixed a crash on exit that could occur when hot_exit is disabled</li>
+    <li>Fixed a crash introduced in 3036</li>
+    <li>Windows: DirectWrite support uses the old path when drawing from a the text buffer</li>
+    <li>Windows: Auto updater supports updating from unicode paths</li>
+    <li>API: Added support for the termios module on Linux and OS X.</li>
+</ul>
+
+<h2>Build 3038</h2>
+<div class="release-date">Release Date: 9 June 2013</div>
+<ul>
+    <li>Fixed further regressions in 3036</li>
+</ul>
+
+<h2>Build 3037</h2>
+<div class="release-date">Release Date: 4 June 2013</div>
+<ul>
+    <li>Fixed a regression in 3036</li>
+</ul>
+
+<h2>Build 3036</h2>
+<div class="release-date">Release Date: 4 June 2013</div>
+<ul>
+    <li>Fixed regressions in file change detection</li>
+    <li>Linux: Added support for High DPI, controlled by the GTK Text Scaling Factor</li>
+    <li>Windows: DirectWrite is enabled automatically in high DPI mode</li>
+    <li>OSX: Fixed context menus not working when the application is in the background</li>
+</ul>
+
+<h2>Build 3035</h2>
+<div class="release-date">Release Date: 17 May 2013</div>
+<ul>
+    <li>Restored Windows XP compatibility</li>
+    <li>Fixed an OSX crash</li>
+    <li>Fixed double closing of script tags</li>
+</ul>
+
+<h2>Build 3034</h2>
+<div class="release-date">Release Date: 16 May 2013</div>
+<ul>
+    <li>Improved file change detection</li>
+    <li>Windows: Added high DPI support</li>
+    <li>Graphics rendering ported to Skia from Cairo</li>
+    <li>HTML tag auto completion is better behaved in script tags</li>
+    <li>API: Fixed Selection.contains</li>
+</ul>
+
+<h2>Build 3032</h2>
+<div class="release-date">Release Date: 6 May 2013</div>
+<ul>
+    <li>Added setting always_prompt_for_file_reload</li>
+    <li>Pressing right in the Goto Anything overlay will open the selected file without closing the overlay</li>
+    <li>Improved handling of deleted files when restoring sessions</li>
+    <li>Linux: Fixed popup menu positioning</li>
+    <li>Windows: Fixed erroneous entries in system menu</li>
+</ul>
+
+<h2>Build 3031</h2>
+<div class="release-date">Release Date: 1 May 2013</div>
+<ul>
+    <li>Find panel has a drop down arrow to select previous items</li>
+    <li>Minor Auto Complete visual tweaks</li>
+    <li>API: Added view.show_popup_menu()</li>
+    <li>API: Added is_valid() method to view and window, to determine if the handle has been invalidated</li>
+</ul>
+
+<h2>Build 3030</h2>
+<div class="release-date">Release Date: 23 April 2013</div>
+<ul>
+    <li>Fixed crash introduced in 3029</li>
+</ul>
+
+<h2>Build 3029</h2>
+<div class="release-date">Release Date: 22 April 2013</div>
+<ul>
+    <li>Fix for rare crash</li>
+    <li>Telemetry is enabled by default for dev builds</li>
+    <li>Improved Minimap hover logic</li>
+    <li>Faster startup time</li>
+</ul>
+
+<h2>Build 3028</h2>
+<div class="release-date">Release Date: 16 April 2013</div>
+<ul>
+    <li>Fixed a regression in 3027</li>
+</ul>
+
+<h2>Build 3027</h2>
+<div class="release-date">Release Date: 15 April 2013</div>
+<ul>
+    <li>Fixed several rare crashes</li>
+    <li>Improved HTML completions when typing outside of tags</li>
+    <li>Fixed Close Tag not respecting self closing tags</li>
+    <li>Windows: Fixed auto updates not installing when the application is installed to a drive other than C</li>
+</ul>
+
+<h2>Build 3026</h2>
+<div class="release-date">Release Date: 10 April 2013</div>
+<ul>
+    <li>auto_find_in_selection defaults to false as intended</li>
+    <li>Fixed a sidebar regression in 3024</li>
+    <li>Windows: Fixed an 'Open in Sublime Text' regression introduced in 3024</li>
+    <li>Improved handling of packages with non-utf8 encoded .py files</li>
+</ul>
+
+<h2>Build 3025</h2>
+<div class="release-date">Release Date: 9 April 2013</div>
+<ul>
+    <li>Fixed some regressions in 3024</li>
+    <li>Added Paste from History</li>
+    <li>API: on_text_command and on_window command are now called when the menu is used</li>
+    <li>API: Added on_post_text_command and on_post_window_command</li>
+</ul>
+
+<h2>Build 3024</h2>
+<div class="release-date">Release Date: 8 April 2013</div>
+<ul>
+    <li>Semi-transient sheets are no longer shown in the OPEN FILES section of the side bar</li>
+    <li>Added setting 'auto_find_in_selection', for S2 style Find in Selection logic</li>
+    <li>Using Google Breakpad to automatically report crashes</li>
+    <li>Symlinks are followed by default in folders added to the side bar</li>
+    <li>PHP: Improved auto indenting for the alternative control syntax</li>
+    <li>"Remove all Folders from Project" now prompts to confirm</li>
+    <li>Deleting a file via the side bar will first close the corresponding view, if any</li>
+    <li>Update window will display properly even if the theme doesn't have rules for it</li>
+    <li>Windows: New style Open Folder dialogs are used on Vista and later</li>
+    <li>API: Added view.close()</li>
+    <li>API: Added sublime.get_macro()</li>
+</ul>
+
+<h2>Build 3023</h2>
+<div class="release-date">Release Date: 3 April 2013</div>
+<ul>
+    <li>New auto update system for Windows and OS X</li>
+    <li>Added telemetry. Telemetry is currently disabled by default, but will be enabled by default in future dev builds. It can be explicitly controlled with the enable_telemetry setting</li>
+    <li>API: Fixed a memory leak in plugin_host</li>
+</ul>
+
+<h2>Build 3022</h2>
+<div class="release-date">Release Date: 18 March 2013</div>
+<ul>
+    <li>Updated syntax highlighting for PHP, Haskell and Pascal</li>
+    <li>API: view.command_history(0, True) now returns the last modifying command, as expected</li>
+    <li>API: view.substr(point) now has the same semantics as S2 for out of bounds addresses</li>
+    <li>API: Improved communication speed with plugin_host</li>
+</ul>
+
+<h2>Build 3020</h2>
+<div class="release-date">Release Date: 13 March 2013</div>
+<ul>
+    <li>Linux: Fixed atomic_save working incorrectly with symlinks</li>
+    <li>Windows: Fixed a crash under Windows 7 x64</li>
+</ul>
+
+<h2>Build 3018</h2>
+<div class="release-date">Release Date: 11 March 2013</div>
+<ul>
+    <li>CSS: Completions will not be offered when typing in selectors</li>
+    <li>Fixed a scenario where close tag gave incorrect results</li>
+    <li>Fixed crash that could occur when dragging a tab associated with a file that needs to be reloaded</li>
+    <li>Windows: Fixed shared memory race condition</li>
+</ul>
+
+<h2>Build 3017</h2>
+<div class="release-date">Release Date: 7 March 2013</div>
+<ul>
+    <li>Further word navigation tweaks</li>
+    <li>HTML: Close Tag now works with script and style elements</li>
+    <li>HTML: Reindent has been reenabled</li>
+    <li>PHP: Fixed typing delay</li>
+</ul>
+
+<h2>Build 3016</h2>
+<div class="release-date">Release Date: 6 March 2013</div>
+<ul>
+    <li>Smarter word navigation</li>
+    <li>HTML: Tags are closed when &lt;/ is entered. This is controlled by the auto_close_tags setting</li>
+    <li>HTML: Added attribute completion</li>
+    <li>Find and Replace panels automatically resize when multi line strings are entered</li>
+    <li>Fixed files being created with the hidden attriute on Windows XP when atomic_save is enabled</li>
+    <li>Linux: Using the correct version number for the deb files</li>
+</ul>
+
+<h2>Build 3015</h2>
+<div class="release-date">Release Date: 4 March 2013</div>
+<ul>
+    <li>Fixed various regressions in 3014</li>
+    <li>OSX: Jump Back is now bound to control+hypen</li>
+    <li>Improved handling of files with extremely long lines</li>
+</ul>
+
+<h2>Build 3014</h2>
+<div class="release-date">Release Date: 28 February 2013</div>
+<ul>
+    <li>Added Jump Back and Jump Forward commands</li>
+    <li>Improved HTML completions</li>
+    <li>Improved HTML auto indent</li>
+    <li>Minimap view rectangle auto hides (controlled by the always_show_minimap_viewport setting)</li>
+    <li>Updated C# package</li>
+    <li>Added invert_selection command</li>
+    <li>atomic_save is enabled by default</li>
+    <li>Indexing: Added detection of stuck workers</li>
+    <li>OSX: Improved handling of line numbers sent via apple events</li>
+    <li>API: view.add_regions() will accept package relative paths for the icon</li>
+    <li>API: view.add_regions() can show underlines</li>
+    <li>API: Added on_pre_close() callback</li>
+    <li>API: view.window() will now work even if the view isn't frontmost</li>
+</ul>
+
+<h2>Build 3013</h2>
+<div class="release-date">Release Date: 21 February 2013</div>
+<ul>
+    <li>Faster loading of large, plain text files</li>
+    <li>Improved console scrolling performance on high resolution displays</li>
+    <li>Further protection against degenerate syntax definitions</li>
+    <li>Added atomic_save setting</li>
+    <li>Fixed Reveal in Side Bar</li>
+    <li>Fixed C++ syntax highlighting for nested class forward declarations</li>
+    <li>Exec panel scrolls again</li>
+    <li>Windows: ok_cancel_dialog uses new visual styles</li>
+    <li>OSX: Added experimental support for line numbers in the ODB protocol</li>
+    <li>API: Added on_text_command() and on_window_command()</li>
+    <li>API: Added load_resource(), load_binary_resource() and find_resources()</li>
+    <li>API: Added encode_value() and decode_value()</li>
+    <li>API: view.sel() supports negative indices</li>
+    <li>API: Implemented settings.add_on_change() and settings.clear_on_change()</li>
+</ul>
