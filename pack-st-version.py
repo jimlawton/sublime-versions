@@ -22,7 +22,7 @@ def main():
     print tempdir
     # Copy sublime_text_3 tree to tempdir.
     stroot = os.path.join(os.getcwd(), "sublime_text_3")
-    shutil.copytree(stroot, tempdir)
+    shutil.copytree(stroot, os.path.join(tempdir, "sublime_text_3"))
     pkgroot = os.path.join(tempdir, "sublime_text_3", "Packages")
     pkgs = []
     for fname in os.listdir(pkgroot):
