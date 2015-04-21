@@ -6,9 +6,12 @@
 #
 # Jim Lawton, April 21st, 2015.
 
+import sys
 import os
 import os.path
 import shutil
+import zipfile
+import tarfile
 
 
 def getPackages(path):
@@ -28,8 +31,25 @@ def getPackages(path):
 
 
 def main():
+    args = sys.argv
+    if len(args) <= 1:
+        sys.exit("ERROR: please supply a tar file!")
+    if not os.path.isfile(sys.argv[1]):
+        sys.exit("ERROR: file %s does not exist!" % sys.argv[1])
+    if os.path.exists("sublime_text_3"):
+        shutil.rmtree("sublime_text_3", ignore_errors=True)
+    with tarfile.open(sys.argv[1], "r") as tar:
+        tar.extractall()
     for pkg in getPackages(os.getcwd()):
-        print pkg
+        pkgroot = os.path.dirname(pkg)
+        pkgname = os.path.basename(pkg).replace(".sublime-package", "")
+        pkgdir = os.path.join(pkgroot, pkgname)
+        if os.path.exists(pkgdir):
+            shutil.rmtree(pkgdir, ignore_errors=True)
+        os.makedirs(pkgdir)
+        with zipfile.ZipFile(pkg, 'r') as pkgzip:
+            pkgzip.extractall(pkgdir)
+
 
 if __name__ == '__main__':
     main()
