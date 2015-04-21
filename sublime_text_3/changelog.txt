@@ -1,3 +1,11 @@
+Build 3069
+----------
+Release Date: 4 Feb 2015
+
+    * Fixed a crash regression in 3068 when typing in a transient sheet
+    * Fixed a long standing issue with spell checking and non-ascii characters
+    * API: Fixed sublime.yes_no_cancel dialog return value on Windows
+
 Build 3068
 ----------
 Release Date: 3 Feb 2015
