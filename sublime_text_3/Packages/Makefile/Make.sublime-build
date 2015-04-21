@@ -4,6 +4,7 @@
 	"working_dir": "${project_path:${folder:${file_path}}}",
 	"selector": "source.makefile",
 	"syntax": "Packages/Makefile/Make.build-language",
+	"keyfile": "Makefile",
 
 	"variants":
 	[
