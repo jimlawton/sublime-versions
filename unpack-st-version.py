@@ -11,9 +11,9 @@ import os.path
 import shutil
 
 
-def main():
+def getPackages(path):
     excludes = [".git"]
-    for dirpath, dirnames, filenames in os.walk(os.getcwd()):
+    for dirpath, dirnames, filenames in os.walk(path):
         if os.path.dirname(dirpath) in excludes:
             dirnames[:] = []
             filenames[:] = []
@@ -24,8 +24,12 @@ def main():
         for filename in filenames:
             if filename.endswith(".sublime-package"):
                 path = os.path.join(dirpath, filename)
-                print path
+                yield path
 
+
+def main():
+    for pkg in getPackages(os.getcwd()):
+        print pkg
 
 if __name__ == '__main__':
     main()
