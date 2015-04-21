@@ -6,6 +6,18 @@ h2 { color: #333; font-size: 2.0em; margin: 0; }
 .release-date, .forum-link { font-size: 10pt }
 </style>
 
+<h2>Build 3074</h2>
+<div class="release-date">Release Date: 3 March 2015</div>
+<div class="forum-link">See also the <a href="http://www.sublimetext.com/forum/viewtopic.php?f=2&t=17681">Forum Thread</a></div>
+<ul>
+<li>Build Systems: Variants can now be selected directly when pressing Primary+B (See <a href="http://www.sublimetext.com/forum/viewtopic.php?f=2&t=17471">this discussion</a> for more information)</li>
+    <li>Posix: Fixed new files not respecting the umask permission flags</li>
+    <li>OSX: Workaround for an OS issue with zero size windows and OpenGL views</li>
+    <li>Windows: Fixed incorrect window sizing after making a maximised window full screen</li>
+    <li>Windows: Fixed access denied errors that could occur when saving with <code>atomic_save</code> disabled</li>
+    <li><code>remember_open_files</code> setting is now hidden, and defaults to false. Note that this change will have no effect if the <code>hot_exit</code> setting is left at its default value of true</li>
+</ul>
+
 <h2>Build 3073</h2>
 <div class="release-date">Release Date: 28 February 2015</div>
 <div class="forum-link">See also the <a href="http://www.sublimetext.com/forum/viewtopic.php?f=2&t=17664">Forum Thread</a></div>

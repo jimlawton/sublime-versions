@@ -333,11 +333,6 @@
     // alongside the project.
     "hot_exit": true,
 
-    // remember_open_files makes the application start up with the last set of
-    // open files. Changing this to false will have no effect if hot_exit is
-    // true
-    "remember_open_files": true,
-
     // remember_full_screen will allow Sublime Text to start in full screen
     // mode if it was exited in full screen mode. When set to false, Sublime
     // Text will never start in full screen mode.

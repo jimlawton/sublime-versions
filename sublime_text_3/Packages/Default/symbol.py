@@ -58,9 +58,11 @@ def navigate_to_symbol(view, symbol, locations):
         if idx >= 0:
             open_location(window, locations[idx])
         else:
-            # TODO: restore sel
             if orig_view:
+                orig_view.sel().clear()
+                orig_view.sel().add_all(orig_sel)
                 window.focus_view(orig_view)
+                orig_view.show(orig_sel[0])
 
     def highlight_entry(window, locations, idx):
         fname, display_fname, rowcol = locations[idx]
