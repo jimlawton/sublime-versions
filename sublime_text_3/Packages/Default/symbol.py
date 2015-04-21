@@ -51,7 +51,7 @@ def navigate_to_symbol(view, symbol, locations):
         fname, display_fname, rowcol = l
         row, col = rowcol
 
-        v = window.ope_file(fname + ":" + str(row) + ":" + str(col),
+        v = window.open_file(fname + ":" + str(row) + ":" + str(col),
             sublime.ENCODED_POSITION | sublime.FORCE_GROUP)
 
     def select_entry(window, locations, idx, orig_view, orig_sel):

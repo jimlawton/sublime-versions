@@ -45,6 +45,7 @@
     { "caption": "Project: Close", "command": "close_workspace" },
     { "caption": "Project: Add Folder", "command": "prompt_add_folder" },
     { "caption": "Project: Refresh Folders", "command": "refresh_folder_list" },
+    { "caption": "Project: Edit Project",  "command": "open_file", "args": {"file": "${project}"} },
 
     { "caption": "Preferences: Settings - Default", "command": "open_file", "args": {"file": "${packages}/Default/Preferences.sublime-settings"} },
     { "caption": "Preferences: Settings - User", "command": "open_file", "args": {"file": "${packages}/User/Preferences.sublime-settings"} },
