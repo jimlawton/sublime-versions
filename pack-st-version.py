@@ -11,6 +11,7 @@ import os.path
 import shutil
 import zipfile
 import tarfile
+import tempfile
 
 
 def main():
