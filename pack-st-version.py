@@ -31,14 +31,17 @@ def main():
             continue
         pkgs.append(fname)
     for pkg in pkgs:
-        pkgfile = pkg + ".sublime-package"
         pkgdir = os.path.join(pkgroot, pkg)
+        pkgfile = pkg + ".sublime-package"
+        pkgpath = os.path.join(pkgroot, pkgfile)
         if not os.path.exists(pkgdir):
             sys.exit("ERROR: package %s does not exist!" % pkgdir)
-        shutil.make_archive(pkgfile, "zip", pkgdir)
+        shutil.make_archive(pkgpath, "zip", root_dir=pkgdir, base_dir=pkgdir)
+        os.rename(pkgpath + ".zip", pkgpath)
         shutil.rmtree(pkgdir, ignore_errors=True)
     with tarfile.open("sublime_text_3_SNAPSHOT.tar.bz2", "w") as tar:
         tar.add(tempdir)
+
 
 if __name__ == '__main__':
     main()
