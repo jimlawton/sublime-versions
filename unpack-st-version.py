@@ -49,6 +49,7 @@ def main():
         os.makedirs(pkgdir)
         with zipfile.ZipFile(pkg, 'r') as pkgzip:
             pkgzip.extractall(pkgdir)
+        os.remove(pkg)
 
 
 if __name__ == '__main__':
