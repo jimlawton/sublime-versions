@@ -6,6 +6,13 @@ h2 { color: #333; font-size: 2.0em; margin: 0; }
 .release-date, .forum-link { font-size: 10pt }
 </style>
 
+<h2>Build 3082</h2>
+<div class="release-date">Release Date: 26 March 2015</div>
+<ul>
+    <li>Improved handling of index corruption: index will be automatically recreated</li>
+    <li>Fixed squiggly lines not drawing squiggly in tall windows</li>
+</ul>
+
 <h2>Build 3081</h2>
 <div class="release-date">Release Date: 25 March 2015</div>
 <ul>
