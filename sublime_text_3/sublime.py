@@ -128,6 +128,9 @@ def log_result_regex(flag):
 def log_indexing(flag):
     sublime_api.log_indexing(flag)
 
+def log_build_systems(flag):
+    sublime_api.log_build_systems(flag)
+
 def score_selector(scope_name, selector):
     return sublime_api.score_selector(scope_name, selector)
 
