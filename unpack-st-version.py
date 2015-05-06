@@ -38,6 +38,8 @@ def main():
         sys.exit("ERROR: file %s does not exist!" % sys.argv[1])
     if os.path.exists("sublime_text_3"):
         shutil.rmtree("sublime_text_3", ignore_errors=True)
+    # TODO: handle case of files being removed from the 
+    # distribution package.
     with tarfile.open(sys.argv[1], "r") as tar:
         tar.extractall()
     for pkg in getPackages(os.getcwd()):
