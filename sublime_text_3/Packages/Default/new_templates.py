@@ -80,7 +80,11 @@ contexts:
       scope: punctuation.definition.comment.example-c
       push: line_comment
 
-    # Keywords are if, else for and while
+    # Keywords are if, else for and while.
+    # Note that blackslashes don't need to be escaped within single quoted
+    # strings in YAML. When using single quoted strings, only single quotes
+    # need to be escaped: this is done by using two single quotes next to each
+    # other.
     - match: '\b(if|else|for|while)\b'
       scope: keyword.control.example-c
 

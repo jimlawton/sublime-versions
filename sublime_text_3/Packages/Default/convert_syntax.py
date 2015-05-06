@@ -99,11 +99,15 @@ def to_yaml(val, start_block_on_newline = False, indent = 0):
 def build_scope_map():
     syntax_by_scope = {}
     for f in sublime.find_resources("*.tmLanguage"):
-        s = sublime.load_resource(f)
-        l = plistlib.readPlistFromBytes(s.encode("utf-8"))
-        if "scopeName" in l:
-            fname = os.path.splitext(f)[0] + ".sublime-syntax"
-            syntax_by_scope[l["scopeName"]] = fname
+        try:
+            s = sublime.load_resource(f)
+            l = plistlib.readPlistFromBytes(s.encode("utf-8"))
+            if "scopeName" in l:
+                fname = os.path.splitext(f)[0] + ".sublime-syntax"
+                syntax_by_scope[l["scopeName"]] = fname
+        except:
+            pass
+
     return syntax_by_scope
 
 scope_map = {}

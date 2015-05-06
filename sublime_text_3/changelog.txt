@@ -6,6 +6,15 @@ h2 { color: #333; font-size: 2.0em; margin: 0; }
 .release-date, .forum-link { font-size: 10pt }
 </style>
 
+<h2>Build 3085</h2>
+<div class="release-date">Release Date: 5 May 2015</div>
+<ul>
+    <li>Sublime Text now includes a custom regex engine that matches multiple regexps in parallel, for faster file loading and indexing</li>
+    <li>.sublime-syntax files can now define variables, to help write repetitive patterns</li>
+    <li>Improved indenting behavior when <tt>indent_to_bracket</tt> is enabled</li>
+    <li>Fixed brackets in strings influencing auto indent</li>
+</ul>
+
 <h2>Build 3084</h2>
 <div class="release-date">Release Date: 8 April 2015</div>
 <ul>
