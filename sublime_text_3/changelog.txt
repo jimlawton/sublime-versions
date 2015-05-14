@@ -6,6 +6,14 @@ h2 { color: #333; font-size: 2.0em; margin: 0; }
 .release-date, .forum-link { font-size: 10pt }
 </style>
 
+<h2>Build 3086</h2>
+<div class="release-date">Release Date: 12 May 2015</div>
+<ul>
+    <li>Fixed a code folding and indent guide regression in 3085 when indenting with tabs</li>
+    <li>Fixed syntax highlighting regressions in 3085</li>
+    <li>Improved the behavior of <tt>convert_syntax.py</tt> on multi line regexs</li>
+</ul>
+
 <h2>Build 3085</h2>
 <div class="release-date">Release Date: 5 May 2015</div>
 <ul>

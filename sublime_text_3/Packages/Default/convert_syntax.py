@@ -76,7 +76,10 @@ def to_yaml(val, start_block_on_newline = False, indent = 0):
             if "\n" in val:
                 assert(start_block_on_newline)
                 if start_block_on_newline:
-                    out += '|\n'
+                    if val[-1] == "\n":
+                        out += '|\n'
+                    else:
+                        out += "|-\n"
                 for l in val.splitlines():
                     out += " " * indent
                     out += l
@@ -130,10 +133,34 @@ def format_external_syntax(key):
     else:
         return syntax_for_scope(key)
 
+def leading_whitespace(s):
+    return s[0:len(s) - len(s.lstrip())]
+
 def format_regex(s):
     if "\n" in s:
-        # trim the leading tabs off of each line
-        s = "\n".join([l.lstrip() for l in s.splitlines()]).rstrip("\n") + "\n"
+
+        lines = s.splitlines()
+
+        # trim common indentation off of each line
+        if len(lines) > 1:
+            common_indent = leading_whitespace(lines[1])
+            for l in lines[2:]:
+                cur_indent = leading_whitespace(l)
+                if cur_indent.startswith(common_indent):
+                    pass
+                elif common_indent.startswith(cur_indent):
+                    common_indent = cur_indent
+                else:
+                    common_indent = ""
+
+            # Generally the first line doesn't have any indentation, add some
+            if not lines[0].startswith(common_indent):
+                lines[0] = common_indent + lines[0].lstrip()
+        else:
+            common_indent = leading_whitespace(lines[0])
+
+        s = "\n".join([l[len(common_indent):] for l in lines]).rstrip("\n")
+
     return s
 
 def format_comment(s):
@@ -418,7 +445,7 @@ try:
 
             data = to_yaml(convert(syn))
 
-            # to_yaml will leave some trailing whitespace, remote it
+            # to_yaml will leave some trailing whitespace, remove it
             data = "\n".join([l.rstrip() for l in data.splitlines()]) + "\n"
 
             v = self.window.new_file()
