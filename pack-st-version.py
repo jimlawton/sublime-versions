@@ -19,7 +19,6 @@ def main():
         sys.exit("ERROR: no sublime_text_3 directory!")
     # Make tempdir for archive.
     tempdir = tempfile.mkdtemp()
-    print tempdir
     # Copy sublime_text_3 tree to tempdir.
     stroot = os.path.join(os.getcwd(), "sublime_text_3")
     shutil.copytree(stroot, os.path.join(tempdir, "sublime_text_3"))
@@ -39,8 +38,9 @@ def main():
         shutil.make_archive(pkgpath, "zip", root_dir=pkgdir, base_dir=pkgdir)
         os.rename(pkgpath + ".zip", pkgpath)
         shutil.rmtree(pkgdir, ignore_errors=True)
-    with tarfile.open("sublime_text_3_SNAPSHOT.tar.bz2", "w") as tar:
-        tar.add(tempdir)
+    #with tarfile.open("sublime_text_3_SNAPSHOT.tar.bz2", "w") as tar:
+    #    tar.add(tempdir)
+    print "Generated packages in:", tempdir
 
 
 if __name__ == '__main__':
