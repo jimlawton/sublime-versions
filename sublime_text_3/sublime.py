@@ -964,6 +964,9 @@ class View(object):
     def hide_popup(self):
         sublime_api.view_hide_popup(self.view_id)
 
+    def is_auto_complete_visible(self):
+        return sublime_api.view_is_auto_complete_visible(self.view_id)
+
 class Settings(object):
     def __init__(self, id):
         self.settings_id = id

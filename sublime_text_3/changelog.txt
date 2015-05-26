@@ -6,6 +6,18 @@ h2 { color: #333; font-size: 2.0em; margin: 0; }
 .release-date, .forum-link { font-size: 10pt }
 </style>
 
+<h2>Build 3087</h2>
+<div class="release-date">Release Date: 26 May 2015</div>
+<ul>
+    <li>Updated various syntax highlighting definitions</li>
+    <li>Syntax: .tmLanguage files may now include .sublime-syntax ones</li>
+    <li>Syntax: Fixed scope names not being applied correctly when pushing multiple contexts</li>
+    <li>Syntax: .sublime-syntax files may now push a list of anonymous contexts</li>
+    <li>Syntax: Anonymous contexts may now be used within <tt>with_prototype</tt> blocks</li>
+    <li>Syntax: Fixed variable expansion within included syntax files</li>
+    <li>API: Added View.is_auto_complete_visible()</li>
+</ul>
+
 <h2>Build 3086</h2>
 <div class="release-date">Release Date: 12 May 2015</div>
 <ul>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+This file exists only for legacy compatibility, all modifications should be
+made to the corresponding .sublime-syntax file instead
+-->
 <plist version="1.0">
 <dict>
-	<key>fileTypes</key>
-	<array>
-		<string>rhtml</string>
-		<string>erb</string>
-		<string>html.erb</string>
-	</array>
+	<key>hidden</key>
+	<true/>
 	<key>foldingStartMarker</key>
 	<string>(?x)
 		(&lt;(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)\b.*?&gt;

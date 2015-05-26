@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+This file exists only for legacy compatibility, all modifications should be
+made to the corresponding .sublime-syntax file instead
+-->
 <plist version="1.0">
 <dict>
+	<key>hidden</key>
+	<true/>
 	<key>comment</key>
 	<string>
 	TODO: unresolved issues
@@ -44,22 +50,6 @@
     ternary operator rule, precedence stuff, symbol rule.
     but also consider 'a.b?(:c)' ??
 </string>
-	<key>fileTypes</key>
-	<array>
-		<string>rb</string>
-		<string>rbx</string>
-		<string>rjs</string>
-		<string>Rakefile</string>
-		<string>rake</string>
-		<string>cgi</string>
-		<string>fcgi</string>
-		<string>gemspec</string>
-		<string>irbrc</string>
-		<string>capfile</string>
-		<string>Gemfile</string>
-	</array>
-	<key>firstLineMatch</key>
-	<string>^#!/.*\bruby</string>
 	<key>foldingStartMarker</key>
 	<string>(?x)^
 	    (\s*+

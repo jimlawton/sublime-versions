@@ -1,28 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+This file exists only for legacy compatibility, all modifications should be
+made to the corresponding .sublime-syntax file instead
+-->
 <plist version="1.0">
 <dict>
-	<key>bundleUUID</key>
-	<string>E3BADC20-6B0E-11D9-9DC9-000D93589AF6</string>
-	<key>comment</key>
-	<string>
-	todo:
-		list comprehension / generator comprehension scope.
-
-	</string>
-	<key>fileTypes</key>
-	<array>
-		<string>py</string>
-		<string>rpy</string>
-		<string>pyw</string>
-		<string>cpy</string>
-		<string>SConstruct</string>
-		<string>Sconstruct</string>
-		<string>sconstruct</string>
-		<string>SConscript</string>
-	</array>
-	<key>firstLineMatch</key>
-	<string>^#!/.*\bpython[0-9.-]*\b</string>
+	<key>hidden</key>
+	<true/>
 	<key>foldingStartMarker</key>
 	<string>^\s*(def|class)\s+([.a-zA-Z0-9_ &lt;]+)\s*(\((.*)\))?\s*:|\{\s*$|\(\s*$|\[\s*$|^\s*"""(?=.)(?!.*""")</string>
 	<key>foldingStopMarker</key>

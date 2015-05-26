@@ -8,7 +8,7 @@ except ImportError:
     pass
 
 def needs_yaml_quoting(s):
-    return (s == "" or s[0] in "\"'%-:?@`&*!,#|>0123456789"
+    return (s == "" or s[0] in "\"'%-:?@`&*!,#|>0123456789="
         or s in ["true", "false", "null"]
         or "# " in s or ": " in s
         or "[" in s or "]" in s or "{" in s or "}" in s
@@ -138,7 +138,6 @@ def leading_whitespace(s):
 
 def format_regex(s):
     if "\n" in s:
-
         lines = s.splitlines()
 
         # trim common indentation off of each line
@@ -175,7 +174,7 @@ def format_captures(c):
     ret = {}
     for k, v in c.items():
         if "name" not in v:
-            warn("patterns and includes are not supported within captures")
+            warn("patterns and includes are not supported within captures: " + str(c))
             continue
 
         try:
@@ -188,7 +187,7 @@ def format_captures(c):
 def warn(msg):
     print(msg, file=sys.stderr)
 
-def make_context(patterns, repository, rewrite_map):
+def make_context(patterns, repository):
     ctx = []
     for p in patterns:
         if "begin" in p:
@@ -233,7 +232,7 @@ def make_context(patterns, repository, rewrite_map):
             else:
                 child_patterns = []
 
-            child = make_context(child_patterns, repository, rewrite_map)
+            child = make_context(child_patterns, repository)
             if apply_last:
                 child.append(end_entry)
             else:
@@ -273,9 +272,6 @@ def make_context(patterns, repository, rewrite_map):
         elif "include" in p:
             key = p["include"]
 
-            if key in rewrite_map:
-                key = rewrite_map[key]
-
             if key[0] == '#':
                 key = key[1:]
                 if key not in repository:
@@ -297,42 +293,6 @@ def make_context(patterns, repository, rewrite_map):
         else:
             raise Exception("unknown pattern type: ")
 
-    # Rewrite all the include-syntax patterns to the format expected by
-    # sublime-syntax files
-    # for j in range(len(ctx)):
-    #     p = ctx[j]
-    #     if "push" in p:
-    #         target_ctx = p["push"]
-    #         assert(isinstance(target_ctx, list))
-
-    #         for i in range(len(target_ctx)):
-    #             target_pattern = target_ctx[i]
-
-    #             if "include-syntax" in target_pattern:
-    #                 new_pattern = p.copy()
-
-    #                 ref = target_pattern["include-syntax"]
-    #                 if '#' in ref:
-    #                     syntax, rule = ref.split('#')
-
-    #                     new_pattern["push"] = syntax_for_scope(syntax) \
-    #                          + '#' + rule
-    #                 else:
-    #                     new_pattern["push"] = syntax_for_scope(ref)
-
-    #                 new_pattern["with_prototype"] = p["push"]
-    #                 del new_pattern["with_prototype"][i]
-
-    #                 for pat in new_pattern["with_prototype"]:
-    #                     if "pop" in pat and "(?=" not in pat["match"]:
-    #                         warn("syntax included, but the pop pattern doesn't"
-    #                             " contain a lookahead, so it may not pop"
-    #                             " off all contexts of the included syntax."
-    #                             " Check this will work as expected: "
-    #                             + pat["match"])
-
-    #                 ctx[j] = new_pattern
-    #                 break
     return ctx
 
 def convert(fname):
@@ -351,28 +311,12 @@ def convert(fname):
         else:
             repository[key] = value["patterns"]
 
-    # Build the rewrite map. This is used to inline items that include an
-    # external syntax
-    rewrite_map = {}
-    # for key, patterns in repository.items():
-    #     for pattern in patterns:
-    #         if "include" in pattern:
-    #             if is_external_syntax(pattern["include"]):
-    #                 # can't currently handle anything other than simple
-    #                 # external includes
-    #                 assert(len(pattern) == 1)
-    #                 rewrite_map['#' + key] = pattern["include"]
-
-    # remove items in the rewrite map from the repo
-    # for k, v in rewrite_map.items():
-    #     del repository[k[1:]]
-
-    contexts = {"main": make_context(l["patterns"], repository, rewrite_map)}
+    contexts = {"main": make_context(l["patterns"], repository)}
 
     for key, value in repository.items():
         assert(key != "main")
 
-        contexts[key] = make_context(value, repository, rewrite_map)
+        contexts[key] = make_context(value, repository)
 
     syn = {}
 
