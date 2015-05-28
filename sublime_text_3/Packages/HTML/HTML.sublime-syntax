@@ -87,7 +87,7 @@ contexts:
         - match: (>)
           captures:
             1: punctuation.definition.tag.end.html
-          push: Packages/CSS/CSS.sublime-syntax
+          push: CSS.sublime-syntax
           with_prototype:
             - match: (?i)(?=</style)
               pop: true
@@ -107,7 +107,7 @@ contexts:
         - match: (>)
           captures:
             1: punctuation.definition.tag.end.html
-          push: Packages/JavaScript/JavaScript.sublime-syntax
+          push: JavaScript.sublime-syntax
           with_prototype:
              - match: (?i)(?=</script)
                pop: true

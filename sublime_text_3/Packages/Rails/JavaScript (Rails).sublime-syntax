@@ -24,5 +24,5 @@ contexts:
           scope: comment.line.number-sign.ruby
           captures:
             1: punctuation.definition.comment.ruby
-        - include: Packages/Rails/Ruby on Rails.sublime-syntax
-    - include: Packages/JavaScript/JavaScript.sublime-syntax
+        - include: "Ruby on Rails.sublime-syntax"
+    - include: JavaScript.sublime-syntax

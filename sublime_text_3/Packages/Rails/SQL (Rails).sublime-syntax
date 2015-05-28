@@ -14,5 +14,5 @@ contexts:
           pop: true
         - match: "#.*?(?=%>)"
           scope: comment.line.number-sign.ruby
-        - include: Packages/Rails/Ruby on Rails.sublime-syntax
-    - include: Packages/SQL/SQL.sublime-syntax
+        - include: "Ruby on Rails.sublime-syntax"
+    - include: SQL.sublime-syntax

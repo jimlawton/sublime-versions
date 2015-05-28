@@ -22,7 +22,7 @@ contexts:
         - meta_scope: comment.block.haml
         - match: ^(?!\1  )
           pop: true
-        - include: Packages/Rails/Ruby Haml.sublime-syntax
+        - include: "Ruby Haml.sublime-syntax"
     - match: '^\s*(?:((%)([\w:]+))|(?=\.|#))'
       captures:
         1: meta.tag.haml
@@ -40,14 +40,14 @@ contexts:
             - meta_scope: meta.section.attributes.haml
             - match: '\}|$|^(?!.*\|\s*$)'
               pop: true
-            - include: Packages/Rails/Ruby on Rails.sublime-syntax
+            - include: "Ruby on Rails.sublime-syntax"
             - include: continuation
         - match: '\[(?=.*\]|.*\|\s*$)'
           push:
             - meta_scope: meta.section.object.haml
             - match: '\]|$|^(?!.*\|\s*$)'
               pop: true
-            - include: Packages/Rails/Ruby on Rails.sublime-syntax
+            - include: "Ruby on Rails.sublime-syntax"
             - include: continuation
         - include: rubyline
         - match: /

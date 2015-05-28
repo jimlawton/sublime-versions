@@ -107,7 +107,7 @@ def build_scope_map():
             l = plistlib.readPlistFromBytes(s.encode("utf-8"))
             if "scopeName" in l:
                 fname = os.path.splitext(f)[0] + ".sublime-syntax"
-                syntax_by_scope[l["scopeName"]] = fname
+                syntax_by_scope[l["scopeName"]] = os.path.basename(fname)
         except:
             pass
 

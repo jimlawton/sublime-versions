@@ -9,7 +9,7 @@ scope: text.html.ruby
 contexts:
   main:
     - match: ''
-      push: Packages/HTML/HTML.sublime-syntax
+      push: HTML.sublime-syntax
       with_prototype:
         - match: "<%+#"
           captures:
@@ -29,4 +29,4 @@ contexts:
               scope: comment.line.number-sign.ruby
               captures:
                 1: punctuation.definition.comment.ruby
-            - include: Packages/Rails/Ruby on Rails.sublime-syntax
+            - include: "Ruby on Rails.sublime-syntax"

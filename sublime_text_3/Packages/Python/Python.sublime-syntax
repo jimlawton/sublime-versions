@@ -546,7 +546,7 @@ contexts:
             captures:
               0: punctuation.definition.string.end.python
             pop: true
-        - Packages/Python/Regular Expressions (Python).sublime-syntax
+        - "Regular Expressions (Python).sublime-syntax"
       with_prototype:
         - match: '(?=""")'
           pop: true
@@ -565,7 +565,7 @@ contexts:
               1: punctuation.definition.string.end.python
               2: invalid.illegal.unclosed-string.python
             pop: true
-        - Packages/Python/Regular Expressions (Python).sublime-syntax
+        - "Regular Expressions (Python).sublime-syntax"
       with_prototype:
         - match: '(?="|\n)'
           pop: true
@@ -638,7 +638,7 @@ contexts:
           pop: true
         - include: constant_placeholder
         - include: escaped_char
-        - include: Packages/SQL/SQL.sublime-syntax
+        - include: SQL.sublime-syntax
     - match: (")(?={{sql_indicator}})
       captures:
         1: punctuation.definition.string.begin.python
@@ -651,7 +651,7 @@ contexts:
           pop: true
         - include: constant_placeholder
         - include: escaped_char
-        - include: Packages/SQL/SQL.sublime-syntax
+        - include: SQL.sublime-syntax
     - match: (""")
       captures:
         1: punctuation.definition.string.begin.python
@@ -688,7 +688,7 @@ contexts:
             captures:
               0: punctuation.definition.string.end.python
             pop: true
-        - Packages/Python/Regular Expressions (Python).sublime-syntax
+        - "Regular Expressions (Python).sublime-syntax"
       with_prototype:
         - match: "(?=''')"
           pop: true
@@ -707,7 +707,7 @@ contexts:
               1: punctuation.definition.string.end.python
               2: invalid.illegal.unclosed-string.python
             pop: true
-        - Packages/Python/Regular Expressions (Python).sublime-syntax
+        - "Regular Expressions (Python).sublime-syntax"
       with_prototype:
         - match: "(?='|\n)"
           pop: true
@@ -780,7 +780,7 @@ contexts:
           pop: true
         - include: constant_placeholder
         - include: escaped_char
-        - include: Packages/SQL/SQL.sublime-syntax
+        - include: SQL.sublime-syntax
     - match: (')(?={{sql_indicator}})
       captures:
         1: punctuation.definition.string.begin.python
@@ -793,7 +793,7 @@ contexts:
           pop: true
         - include: constant_placeholder
         - include: escaped_char
-        - include: Packages/SQL/SQL.sublime-syntax
+        - include: SQL.sublime-syntax
     - match: (''')
       captures:
         1: punctuation.definition.string.begin.python

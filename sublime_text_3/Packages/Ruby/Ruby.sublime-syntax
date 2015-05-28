@@ -617,7 +617,7 @@ contexts:
             - meta_scope: text.html.embedded.ruby
             - match: (?=not)impossible
               pop: true
-            - include: Packages/HTML/HTML.sublime-syntax
+            - include: HTML.sublime-syntax
     - match: '(?><<-("?)((?:[_\w]+_|)HTML)\b\1)'
       comment: heredoc with embedded HTML and indented terminator
       captures:
@@ -630,7 +630,7 @@ contexts:
             0: punctuation.definition.string.end.ruby
           pop: true
         - include: heredoc
-        - include: Packages/HTML/HTML.sublime-syntax
+        - include: HTML.sublime-syntax
         - include: interpolated_ruby
         - include: escaped_char
     - match: '(?><<-("?)((?:[_\w]+_|)SQL)\b\1)'
@@ -645,7 +645,7 @@ contexts:
             0: punctuation.definition.string.end.ruby
           pop: true
         - include: heredoc
-        - include: Packages/SQL/SQL.sublime-syntax
+        - include: SQL.sublime-syntax
         - include: interpolated_ruby
         - include: escaped_char
     - match: '(?><<-("?)((?:[_\w]+_|)CSS)\b\1)'
@@ -660,7 +660,7 @@ contexts:
             0: punctuation.definition.string.end.ruby
           pop: true
         - include: heredoc
-        - include: Packages/CSS/CSS.sublime-syntax
+        - include: CSS.sublime-syntax
         - include: interpolated_ruby
         - include: escaped_char
     - match: '(?><<-("?)((?:[_\w]+_|)(?:JS|JAVASCRIPT))\b\1)'
@@ -675,7 +675,7 @@ contexts:
             0: punctuation.definition.string.end.ruby
           pop: true
         - include: heredoc
-        - include: Packages/JavaScript/JavaScript.sublime-syntax
+        - include: JavaScript.sublime-syntax
         - include: interpolated_ruby
         - include: escaped_char
     # - match: '(?><<-("?)((?:[_\w]+_|)(?:SH|SHELL))\b\1)'
@@ -690,7 +690,7 @@ contexts:
     #         0: punctuation.definition.string.end.ruby
     #       pop: true
     #     - include: heredoc
-    #     - include: Packages/ShellScript/Shell-Unix-Generic.sublime-syntax
+    #     - include: Shell-Unix-Generic.sublime-syntax
     #     - include: interpolated_ruby
     #     - include: escaped_char
     - match: '(?><<-("?)((?:[_\w]+_|)RUBY)\b\1)'
@@ -705,7 +705,7 @@ contexts:
             0: punctuation.definition.string.end.ruby
           pop: true
         - include: heredoc
-        - include: Packages/Ruby/Ruby.sublime-syntax
+        - include: Ruby.sublime-syntax
         - include: interpolated_ruby
         - include: escaped_char
     - match: (?>\=\s*<<(\w+))
