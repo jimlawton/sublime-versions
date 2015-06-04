@@ -6,6 +6,12 @@ h2 { color: #333; font-size: 2.0em; margin: 0; }
 .release-date, .forum-link { font-size: 10pt }
 </style>
 
+<h2>Build 3091</h2>
+<div class="release-date">Release Date: 2 June 2015</div>
+<ul>
+    <li>Fixed a regression in 3090 where .tmLanguage files with missing includes weren't loaded</li>
+</ul>
+
 <h2>Build 3090</h2>
 <div class="release-date">Release Date: 2 June 2015</div>
 <ul>

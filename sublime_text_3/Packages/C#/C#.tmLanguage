@@ -281,10 +281,6 @@
 					<key>include</key>
 					<string>#builtinTypes</string>
 				</dict>
-				<dict>
-					<key>include</key>
-					<string>#documentation</string>
-				</dict>
 			</array>
 		</dict>
 		<key>comments</key>
