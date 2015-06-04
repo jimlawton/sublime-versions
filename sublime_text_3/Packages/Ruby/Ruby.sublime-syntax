@@ -617,7 +617,7 @@ contexts:
             - meta_scope: text.html.embedded.ruby
             - match: (?=not)impossible
               pop: true
-            - include: HTML.sublime-syntax
+            - include: 'scope:text.html.basic'
     - match: '(?><<-("?)((?:[_\w]+_|)HTML)\b\1)'
       comment: heredoc with embedded HTML and indented terminator
       captures:
@@ -630,7 +630,7 @@ contexts:
             0: punctuation.definition.string.end.ruby
           pop: true
         - include: heredoc
-        - include: HTML.sublime-syntax
+        - include: 'scope:text.html.basic'
         - include: interpolated_ruby
         - include: escaped_char
     - match: '(?><<-("?)((?:[_\w]+_|)SQL)\b\1)'
@@ -645,7 +645,7 @@ contexts:
             0: punctuation.definition.string.end.ruby
           pop: true
         - include: heredoc
-        - include: SQL.sublime-syntax
+        - include: 'scope:source.sql'
         - include: interpolated_ruby
         - include: escaped_char
     - match: '(?><<-("?)((?:[_\w]+_|)CSS)\b\1)'
@@ -660,7 +660,7 @@ contexts:
             0: punctuation.definition.string.end.ruby
           pop: true
         - include: heredoc
-        - include: CSS.sublime-syntax
+        - include: 'scope:source.css'
         - include: interpolated_ruby
         - include: escaped_char
     - match: '(?><<-("?)((?:[_\w]+_|)(?:JS|JAVASCRIPT))\b\1)'
@@ -675,7 +675,7 @@ contexts:
             0: punctuation.definition.string.end.ruby
           pop: true
         - include: heredoc
-        - include: JavaScript.sublime-syntax
+        - include: 'scope:source.js'
         - include: interpolated_ruby
         - include: escaped_char
     # - match: '(?><<-("?)((?:[_\w]+_|)(?:SH|SHELL))\b\1)'
@@ -705,7 +705,7 @@ contexts:
             0: punctuation.definition.string.end.ruby
           pop: true
         - include: heredoc
-        - include: Ruby.sublime-syntax
+        - include: main
         - include: interpolated_ruby
         - include: escaped_char
     - match: (?>\=\s*<<(\w+))

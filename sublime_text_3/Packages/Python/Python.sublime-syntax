@@ -638,7 +638,7 @@ contexts:
           pop: true
         - include: constant_placeholder
         - include: escaped_char
-        - include: SQL.sublime-syntax
+        - include: 'scope:source.sql'
     - match: (")(?={{sql_indicator}})
       captures:
         1: punctuation.definition.string.begin.python
@@ -651,7 +651,7 @@ contexts:
           pop: true
         - include: constant_placeholder
         - include: escaped_char
-        - include: SQL.sublime-syntax
+        - include: 'scope:source.sql'
     - match: (""")
       captures:
         1: punctuation.definition.string.begin.python
@@ -780,7 +780,7 @@ contexts:
           pop: true
         - include: constant_placeholder
         - include: escaped_char
-        - include: SQL.sublime-syntax
+        - include: 'scope:source.sql'
     - match: (')(?={{sql_indicator}})
       captures:
         1: punctuation.definition.string.begin.python
@@ -793,7 +793,7 @@ contexts:
           pop: true
         - include: constant_placeholder
         - include: escaped_char
-        - include: SQL.sublime-syntax
+        - include: 'scope:source.sql'
     - match: (''')
       captures:
         1: punctuation.definition.string.begin.python

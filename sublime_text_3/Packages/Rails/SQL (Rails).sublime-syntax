@@ -15,4 +15,4 @@ contexts:
         - match: "#.*?(?=%>)"
           scope: comment.line.number-sign.ruby
         - include: "Ruby on Rails.sublime-syntax"
-    - include: SQL.sublime-syntax
+    - include: 'scope:source.sql'

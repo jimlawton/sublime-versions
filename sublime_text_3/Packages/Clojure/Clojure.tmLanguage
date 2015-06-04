@@ -3214,7 +3214,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>source.regexp.oniguruma</string>
+							<string>source.regexp</string>
 						</dict>
 					</array>
 				</dict>

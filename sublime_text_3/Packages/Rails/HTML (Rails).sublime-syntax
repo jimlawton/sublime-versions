@@ -9,7 +9,7 @@ scope: text.html.ruby
 contexts:
   main:
     - match: ''
-      push: HTML.sublime-syntax
+      push: 'scope:text.html.basic'
       with_prototype:
         - match: "<%+#"
           captures:

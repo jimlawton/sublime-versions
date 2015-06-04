@@ -115,11 +115,15 @@ def build_scope_map():
 
 scope_map = {}
 def syntax_for_scope(key):
-    global scope_map
-    if len(scope_map) == 0:
-        scope_map = build_scope_map()
+    use_scope_refs = True
+    if use_scope_refs:
+        return "scope:" + key
+    else:
+        global scope_map
+        if len(scope_map) == 0:
+            scope_map = build_scope_map()
 
-    return scope_map[key]
+        return scope_map[key]
 
 def is_external_syntax(key):
     return key[0] not in "#$"
