@@ -1,6 +1,6 @@
 #!/bin/sh
 STARTVER=3065
-ENDVER=3084
+ENDVER=3092
 URLBASE="http://c758482.r82.cf2.rackcdn.com/"
 TARBASE="sublime_text_3_build_"
 DEBBASE="sublime-text_build-"
