@@ -6,6 +6,14 @@ h2 { color: #333; font-size: 2.0em; margin: 0; }
 .release-date, .forum-link { font-size: 10pt }
 </style>
 
+<h2>Build 3093</h2>
+<div class="release-date">Release Date: 1 July 2015</div>
+<ul>
+    <li>Packages are now on <a href="https://github.com/sublimehq/Packages">GitHub</a></li>
+    <li>Incorporates several community provided improvements to the above packages, with significant improvements to HTML, CSS and JavaScript</li>
+    <li>Fixed an infinite loop that occurred when loading some .sublime-syntax files</li>
+</ul>
+
 <h2>Build 3092</h2>
 <div class="release-date">Release Date: 4 June 2015</div>
 <ul>

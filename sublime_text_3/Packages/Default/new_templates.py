@@ -6,7 +6,7 @@ class NewBuildSystemCommand(sublime_plugin.WindowCommand):
         v = self.window.new_file()
         v.settings().set('default_dir',
             os.path.join(sublime.packages_path(), 'User'))
-        v.assign_syntax('Packages/JavaScript/JSON.tmLanguage')
+        v.assign_syntax('Packages/JavaScript/JSON.sublime-syntax')
         v.set_name('untitled.sublime-build')
 
         template = """{
@@ -21,7 +21,7 @@ class NewPluginCommand(sublime_plugin.WindowCommand):
         v = self.window.new_file()
         v.settings().set('default_dir',
             os.path.join(sublime.packages_path(), 'User'))
-        v.assign_syntax('Packages/Python/Python.tmLanguage')
+        v.assign_syntax('Packages/Python/Python.sublime-syntax')
 
         template = """import sublime, sublime_plugin
 
@@ -38,7 +38,7 @@ class NewSnippetCommand(sublime_plugin.WindowCommand):
         v.settings().set('default_dir',
             os.path.join(sublime.packages_path(), 'User'))
         v.settings().set('default_extension', 'sublime-snippet')
-        v.assign_syntax('Packages/XML/XML.tmLanguage')
+        v.assign_syntax('Packages/XML/XML.sublime-syntax')
 
         template = """<snippet>
 	<content><![CDATA[
