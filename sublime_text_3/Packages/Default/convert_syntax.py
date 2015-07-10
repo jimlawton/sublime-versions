@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import plistlib
 import os
 import sys
@@ -9,6 +11,7 @@ except ImportError:
 
 def needs_yaml_quoting(s):
     return (s == "" or s[0] in "\"'%-:?@`&*!,#|>0123456789="
+        or s.startswith("<<")
         or s in ["true", "false", "null"]
         or "# " in s or ": " in s
         or "[" in s or "]" in s or "{" in s or "}" in s
@@ -213,8 +216,9 @@ def make_context(patterns, repository):
             end_entry = {}
             end_entry["match"] = format_regex(p["end"])
             end_entry["pop"] = True
-            if "endCaptures" in p:
-                captures = format_captures(p["endCaptures"])
+            if "endCaptures" in p or "captures" in p:
+                captures = format_captures(
+                    p.get("endCaptures", p.get("captures")))
                 if "0" in captures:
                     end_entry["scope"] = captures["0"]
                     del captures["0"]
@@ -295,7 +299,7 @@ def make_context(patterns, repository):
                 ctx.append({"include": format_external_syntax(key)})
 
         else:
-            raise Exception("unknown pattern type: ")
+            raise Exception("unknown pattern type: %s" % p.keys())
 
     return ctx
 
@@ -394,7 +398,7 @@ try:
             data = to_yaml(convert(syn))
 
             # to_yaml will leave some trailing whitespace, remove it
-            data = "\n".join([l.rstrip() for l in data.splitlines()]) + "\n"
+            data = "\n".join(l.rstrip() for l in data.splitlines()) + "\n"
 
             v = self.window.new_file()
             v.set_name(os.path.basename(base) + ".sublime-syntax")
@@ -432,9 +436,12 @@ except ImportError:
     import fnmatch
 
     class sublime:
-        def find_resources(pattern):
+        base_path = "."
+
+        @classmethod
+        def find_resources(cls, pattern):
             paths = []
-            for root, dirs, files in os.walk('.'):
+            for root, dirs, files in os.walk(cls.base_path):
                 for fname in files:
                     if fnmatch.fnmatch(fname, pattern):
                         path = os.path.join(root, fname)
@@ -445,23 +452,41 @@ except ImportError:
                         paths.append(path)
             return paths
 
+        @staticmethod
         def load_resource(fname):
             with open(fname, "r", encoding="utf-8") as f:
                 return f.read()
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    args = sys.argv[1:]
+
+    if not args:
         print("usage: convert_syntax.py files")
+        print("       convert_syntax.py folder")
     else:
-        for fname in sys.argv[1:]:
-            o = convert(fname)
+        filenames = []
+        for path in args:
+            if os.path.isdir(path):
+                sublime.base_path = path
+                filenames.extend(sublime.find_resources("*.tmLanguage"))
+            else:
+                filenames.append(path)
 
+        for fname in filenames:
+            outfile = os.path.splitext(fname)[0] + ".sublime-syntax"
+            if os.path.exists(outfile):
+                print("file already exists: " + outfile)
+                continue
+
+            data = convert(fname)
+            text = to_yaml(data)
             # verify that to_yaml produces valid yaml for this object
-            if yaml:
-                assert(o == yaml.load(to_yaml(o)))
+            if 'yaml' in sys.modules:
+                assert(data == yaml.load(text))
 
-            with open(os.path.splitext(fname)[0] + ".sublime-syntax", "w",
-                encoding="utf-8") as f:
-                data = to_yaml(convert(sys.argv[1]))
-                data = "\n".join([l.rstrip() for l in data.splitlines()]) + "\n"
-                f.write(data)
+            with open(outfile, "w", encoding="utf-8") as f:
+                # to_yaml will leave some trailing whitespace, remove it
+                text = "\n".join(l.rstrip() for l in text.splitlines()) + "\n"
+                f.write(text)
+
+            print("converted " + outfile)

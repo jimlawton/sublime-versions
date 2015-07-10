@@ -6,11 +6,17 @@ h2 { color: #333; font-size: 2.0em; margin: 0; }
 .release-date, .forum-link { font-size: 10pt }
 </style>
 
+<h2>Build 3095</h2>
+<div class="release-date">Release Date: 10 July 2015</div>
+<ul>
+    <li>Incorporates further changes to the provided packages</li>
+</ul>
+
 <h2>Build 3094</h2>
 <div class="release-date">Release Date: 2 July 2015</div>
 <ul>
     <li>Fixed a regression in 3093 where the Go and Makefile syntax definitions were missing</li>
-    <li>Incorporates further changes to the provided Packages</li>
+    <li>Incorporates further changes to the provided packages</li>
 </ul>
 
 <h2>Build 3093</h2>
